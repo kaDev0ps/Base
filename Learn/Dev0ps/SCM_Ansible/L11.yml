@@ -1,0 +1,21 @@
+# Работа с внешними переменными
+Если мы создали playbook и хотим его запускать на определенные хосты, но напрямую редактировать файл влом
+Можем указать переменную в hosts
+Сделаем переменную MYHOSTS
+
+---
+ - name: InstallApache and copy foto
+   hosts: "{{ MYHOST }}"
+   become: yes
+
+   roles:
+     - { role: deploy_apache, when: ansible_system == 'Linux'}
+
+И при запуске команды ansible указываем 
+
+ansible-playbook playbook10.yml --extra-vars "MYHOST=stagin_servers"
+
+Моно использовать любые значения переменных из разных мест. Переменные  extra-vars имеют наивысшее значение! 
+Рассмотрим пример использоания нескольких переменных
+
+ansible-playbook playbook10.yml --extra-vars "MYHOST=stagin_servers owner=DENIS"

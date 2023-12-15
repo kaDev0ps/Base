@@ -1,0 +1,91 @@
+# Работа с Loop
+Нам нужно закинуть все файлы  директоию сайта
+---
+- name: Loop Playbook
+  hosts: linux_CentOS
+  become: yes
+
+  tasks:
+
+  - name: Say Hello Worl
+    debug: msg="Hello {{ item }}"
+    loop:
+     - "Vasya"
+     - "Petya"
+     - "Olya"
+
+  - name: Loop Until example
+    shell: echo -n Z >> myfile.txt && cat myfile.txt
+    register: output
+    delay: 2
+    retries: 10
+    until: output.stdout.find("ZZZZ") == false
+
+  - name: Print Final Output
+    debug:
+     var: output.stdout
+
+==========================================
+В первом примере мы создаем переменную item внутри задачи.
+Во второй задаче мы выполняем команду записи Z в файл и выводить файл на экран. Сохраняем результат в register  
+ делаем паузы между подхлдами в 2 секунды, количество подходов 10 или пока в файле не будет ZZZZ.
+ В последней задаче мы выводим на экран значение файла.
+
+ # Загрузка каталого со всеми папками на сервера
+
+ ---
+ - name: InstallApache and copy foto
+   hosts: all
+   become: yes
+
+   vars:
+    source_folder: /home/ka/ansible/site
+    destin_folder: /var/www/html
+
+
+   tasks:
+
+   - name: Check version OS
+     debug: var="ansible_os_family"
+
+   - block: # ====BLOCK FOR REDHAT====
+       - name: Install Apache Web Server for RedHat
+         yum: name=httpd state=latest
+
+       - name: Start WebServer for RedHat
+         service: name=httpd state=started enabled=yes
+     when: ansible_os_family == "RedHat"
+
+   - block: # ====BLOCK FOR UBUNTU====
+       - name: Install Apache WebServer for Ubuntu
+         apt: name=apache2 state=latest
+
+       - name: Start WebServer for Ubuntu
+         service: name=apache2 state=started enabled=yes
+     when: ansible_os_family == "Debian"
+
+   - name: Copy My index.html
+     copy: src={{ source_folder }}/{{ item }} dest={{ destin_folder }} mode=555
+     loop:
+          - "index.html"
+          - "foto.jpg"
+     notify:
+          - Restarted Apache_Ubuntu
+          - Restarted Apache_RedHat
+# Мы можем не перечислять все файлы в ручную, а указать, что копировать нужно все файлы в указанной директоррии, тогда нажа задача изменится.
+  #  - name: Copy My index.html
+  #    copy: src={{ item }} dest={{ destin_folder }} mode=555
+       with_fileglob: "{{ source_folder}}/*.*"
+  #    notify:
+  #         - Restarted Apache_Ubuntu
+  #         - Restarted Apache_RedHat
+
+   handlers:
+
+       - name: Restarted Apache_RedHat
+         service: name=httpd state=restarted
+         when: ansible_os_family == "RedHat"
+
+       - name: Restarted Apache_Ubuntu
+         service: name=apache2 state=restarted
+         when: ansible_os_family == "Ubuntu"

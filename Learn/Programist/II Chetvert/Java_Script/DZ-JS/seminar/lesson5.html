@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const product = {
+            name: 'Стол',
+            productPrice: 555,
+            userRegistred: false,
+            reg: function () {
+                product.userRegistred = true
+            },
+            count: 0,
+            buy: function () {
+                if (this.count > 0) {
+                    console.log('Вы купили товар');
+                } else { console.log('Вы НЕ купили товар'); }
+
+            },
+            buyProduct: function () {
+                if (product.userRegistred) {
+                    console.log('Товар в корзине')
+                } else {
+                    console.log('Не в корзине');
+                }
+            }
+
+        }
+
+        product.buyProduct();
+        product.reg();
+        product.buyProduct();
+        console.log(product);
+        product.link = 'link';
+        console.log(product);
+        delete product.name;
+        product.buy();
+    </script>
+    <script>
+        // меняется объект, даже если создана переменная
+        let productSale = product;
+        console.log(productSale);
+        productSale.price = 1500;
+        console.log(productSale);
+        console.log(product);
+    </script>
+    <script>
+        const car = {
+            make: "Audi",
+            odometr: 0,
+            engineIsStarted: false,
+            startEngine: function () {
+                thes.engineIsStarted = true;
+            },
+            stopEngine: function () {
+                this.engineIsStarted = false;
+            },
+            haveRoadTrip: function (distance) {
+                if (this.engineIsStarted) {
+                    this.odometr += distance;
+                } else {
+                    alert("Сначала лдвугатель!")
+                }
+            }
+        }
+
+    </script>
+
+    <script>
+        const test = {
+            text: 'hello',
+            price: 1000
+        }
+        for (const key in test) {
+            console.log(key);
+        }
+    </script>
+    <script>
+        // Преобразование объекта в массив
+        const object = {
+            1: 'hello',
+            2: 'world'
+        };
+        const student = object.map((student) => 'student:${student}');
+        console.log(Object.values(car)); //вывод всез значений объекта
+    </script>
+    <script>
+        // Object.keys
+        constgroup1 = {
+            "Ivanov": { practicePlace: "ldu-1", practiceTime: 56 },
+            "Petrov": { practicePlace: "kamaz", practiceTime: 120 },
+            "Sidorov": { practicePlace: "ldu-1", practiceTime: 148 },
+            "Belkin": { practicePlace: "GosDZU", practiceTime: 20 },
+            "Avdeev": { practicePlace: "LPK", practiceTime: 160 }
+        }
+        constgroup1Students = Object.keys(group1); console.log(group1Students);// ["Ivanov", "Petrov","Sidorov", "Belkin", "Avdeev"]
+    </script>
+    <script>
+        // Object.values
+        const car = {
+            make: "Audi",
+            model: "A5",
+            year: 2023,
+            color: "red",
+            passengers: 2,
+            power: 249,
+            odometer: 0,
+        };
+        console.log(Object.values(car));//  ['Audi', 'A5',2023, 'red', 2, 249, 0]
+    </script>
+    <script>
+        // Object.entries
+        constcar = {
+            make: "Audi",
+            model: "A5",
+            year: 2023,
+            color: "red",
+            passengers: 2,
+            power: 249,
+            odometer: 0,
+        };
+        console.log(Object.entries(car)); // 0: (2) ['make', 'Audi'] // 1: (2) ['model', 'A5'] // 2: (2) ['year', 2023] // 3: (2) ['color', 'red'] // 4: (2) ['passengers', 2] // 5: (2) ['power', 249] // 6: (2) ['odometer', 0]
+    </script>
+    <!-- Функции высшего порядка -->
+    <!-- map Метод map является одним из самых используемых при работе с массивом. Он позволяет проитерировать весь массив, и создать на основе него новый массив.-->
+    <script>
+        const studentsPracticeTime = [{ firstName: "Ivanov", practiceTime: 56 }, { firstName: "Petrov", practiceTime: 120 }, { firstName: "Sidorov", practiceTime: 148 }, { firstName: "Belkin", practiceTime: 20 }, { firstName: "Avdeev", practiceTime: 160 }];
+        // Мы хотим вывести в таблицу студентов и информацию для каждого, прошел ли он практику уже. Практика будет считаться пройденной, если студент отработал 120 часов или больше. 
+        const dataForTable = studentsPracticeTime.map((student) => {
+            if (student.practiceTime < 120) {
+                return {
+                    // Мы возвращаем новый объект, более удобный для вывода. 
+                    Student: student.firstName, Practice: "Not passed"
+                };
+            } else { return { Student: student.firstName, Practice: "Passed" }; }
+        }); console.table(dataForTable); // В консоль можно выводить разными способами, если использовать метод table, и передать туда массив или объект, этот метод выводит данные в виде таблицы.
+
+    </script>
+    <!-- Метод filter используется для фильтрации элементовмассива по какому-нибудь правилу, которое задаете вы сами.  -->
+    <script>
+        const studentsPracticeTime = [{ firstName: "Ivanov", practiceTime: 56 },
+        { firstName: "Petrov", practiceTime: 120 },
+        { firstName: "Belkin", practiceTime: 20 }];
+        // Мы хотим отфильтровать массив студентов, оставив в новом массиве только тех, кто уже прошел практику. Практика будет считаться пройденной, если студент отработал 120 часов или больше. 
+        const studentsPassedPractice = studentsPracticeTime.filter((student) => {
+            if (student.practiceTime < 120)
+                return false return true
+        });
+        console.log(studentsPassedPractice);
+    // Получили новый массив, в котором только те студенты, кто уже прошел практику.
+    // [ { //     "firstName": "Petrov",
+    //     "practiceTime": 120 // }, {
+    //     "firstName": "Sidorov",
+    //     "practiceTime": 148 // }, {
+    //     "firstName": "Avdeev",
+    //     "practiceTime": 160
+    // }
+    // ]
+    </script>
+    <!-- Метод reduce не так просто понять с первого раза. Этот метод еще называют свёрткой, т.к. он проходится по всему массиву и позволяет собрать и обработать его значение в новую форму,  -->
+    <script>
+        const studentsPracticeTime = [{ firstName: "Ivanov", practiceTime: 56 },
+        { firstName: "Petrov", practiceTime: 120 },
+        { firstName: "Sidorov", practiceTime: 148 },
+        { firstName: "Belkin", practiceTime: 20 },
+        { firstName: "Avdeev", practiceTime: 160 }];
+        // Посчитаем сколько всего часов практики отработали студенты. 
+        const totalTime = studentsPracticeTime.reduce((acc, student) => {
+            // Первое значение - это функция обратного вызова, которая будет получать значение аккумулятора (acc) при каждой итерации; и текущий элемент массива (student). 
+            return acc + student.practiceTime;
+        }, 0);
+        // Второй аргумент - это первоначальное значение аккумулятора - 0. 
+        console.log(totalTime); // 504 
+        const studentsPracticeTime = [
+            { firstName: "Ivanov", practiceTime: 56 },
+            { firstName: "Petrov", practiceTime: 120 },
+            { firstName: "Sidorov", practiceTime: 148 },
+            { firstName: "Belkin", practiceTime: 20 },
+            { firstName: "Avdeev", practiceTime: 160 }];
+        // Посчитаем сколько всего часов практики отработали студенты. 
+        const totalTime = studentsPracticeTime.reduce((acc, student) => {
+            // Первое значение - это функция обратного вызова, которая будет получать значение аккумулятора (acc) при каждой итерации; и текущий элемент массива (student). 
+            return acc + student.practiceTime;
+        }, 0); // Второй аргумент - это первоначальное значение аккумулятора - 0. 
+        console.log(totalTime); // 504
+    </script>
+    <!-- Метод some используется, когда нам нужно проверить, что в массиве есть хоть один подходящий нам элемент.  -->
+    <script>
+        const studentsPracticeTime = [
+            { firstName: "Ivanov", practiceTime: 56 },
+            { firstName: "Petrov", practiceTime: 120 },
+            { firstName: "Sidorov", practiceTime: 148 },
+            { firstName: "Belkin", practiceTime: 20 },
+            { firstName: "Avdeev", practiceTime: 160 }];
+        // Проверим, есть ли хоть один студент, который прошел практику. 
+        const isSomebodyPassedPractice = studentsPracticeTime.some((student) => {
+            console.log(student.firstName);
+            // Добавим вывод студента, чтобы посмотреть сколько элементов массива будет проитерированно. 
+            return student.practiceTime >= 120;
+        }); // "Ivanov"
+        // "Petrov" - итерации остановились на втором элементе массива, т.к. он удовлетворяет нашему условию и метод some дальше итерации не выполняет. 
+        console.log(isSomebodyPassedPractice); // true -среди студентов есть те, кто прошел практику.
+    </script>
+    <!-- find-онпозволяет найти элемент в массиве по заданному условию.В отличия от метода indexOf, метод find позволяет искать не точное совпадение элемента.  -->
+    <script>
+        conststudentsPracticeTime = [{ firstName: "Ivanov", practiceTime: 56 },
+        { firstName: "Petrov", practiceTime: 120 },
+        {
+            firstName: "Sidorov", practiceTime: 148
+        }, { firstName: "Belkin", practiceTime: 20 },
+        { firstName: "Avdeev", practiceTime: 160 }];
+        // Мы хотим найти студента Belkin и посмотреть скольковремени он отработал на практике. 
+        conststudentBelkin = studentsPracticeTime.find((student) => { returnstudent.firstName === "Belkin"; });
+        console.log(studentBelkin.practiceTime);// 20
+    </script>
+    <!-- Порой нам необходимо часто обращаться к определенным элементам массива или ключам объекта в нашем алгоритме, и чтобы каждый раз не писать имя массива/объекта, 
+        с путем до нужного нам элемента, мы можем сохранить данные такого элемента в отдельную переменную.  -->
+    <script>
+        // Сбор данных из объекта. 
+        conststudent = { firstName: "Ivan", lastName: "Petrov", age: 21, }; const firstName = student.firstName;
+        // мы объявляем отдельно переменную, под каждый нужный нам параметр. 
+        const lastName = student.lastName; const age = student.age;
+        // Сбор данных из массива. 
+        const students = ["Ivanov", "Petrov", "Belkin"];
+        const student1 = students[0];
+        const student2 = students[1];
+        const student3 = students[2];
+
+        // Не очень удобно. Деструктуризация дала нам гораздо более простой и удобный синтаксис:
+
+        // Сбор данных из объекта. 
+        const student = { firstName: "Ivan", lastName: "Petrov", age: 21, };
+        const { firstName, lastName, age } = student;
+        // Деструктуризация-  мы объявляем все переменные в фигурных скобках, название должно совпадать с нужным нам параметром. 
+        // Сбор данных из массива. 
+        const students = ["Ivanov", "Petrov", "Belkin"]; const [student1, student2, student3] = students;
+        // Деструктуризация - Тут мы указываем имена переменных в квадратных скобках, и в них по порядку будут записаны элементы массива.
+
+        //Теперь мы можем объявлять все нужные нам переменные в одном месте и получать данные из объектов или массивов одной строкой.
+
+        // Сбор данных из объекта. 
+        const student = { firstName: "Ivan", lastName: "Petrov", age: 21, };
+        // Деструктурируем значение ключа firstName в переменную studentName. И зададим для возраста значение по умолчанию, равное 20. 
+        const { firstName: studentName, lastName, age = 20 } = student;
+        // Сбор данных из массива. const students = ["Ivanov", "Petrov", "Belkin"]; 
+        const [student1, student2, student3] = students;
+// Тут мы указываем имена переменных в квадратных скобках, и в них по порядку будут записаны элементы массива.
+    </script>
+
+</body>
+</body>
+
+</html>

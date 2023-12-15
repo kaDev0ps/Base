@@ -1,0 +1,129 @@
+GET HTTPs://ya.ru
+reqres.in - тестовые сервера
+
+###
+
+get https://reqres.in/api/users
+
+###
+
+get https://reqres.in/api/users?page=2
+
+
+https://jsonformatter.org/xml-formatter
+
+<?xml version="1.0"?>
+<catalog>
+    <book>
+        <name>
+            Название книги
+        </name>
+        <author>Автор</author>
+        <countpage>кол-во страниц</countpage>
+        <year>год</year>
+        <price>цена</price>
+    </book>
+        <book>
+        <name>
+            Название книги 2
+        </name>
+        <author>Автор</author>
+        <countpage>кол-во страниц</countpage>
+        <year>год</year>
+        <price>цена</price>
+    </book>
+</catalog>
+
+<?xml version="1.0"?>
+<doRegister>
+        <email>123@re.ru</email>
+        <name>Автор</name>
+        <password>123ц</password>
+</doRegister>
+<doRegister>
+        <email>12333@re.ru</email>
+        <name>Авто33р</name>
+        <password>123ц33</password>
+</doRegister>
+
+<?xml version="1.0"?>
+<school>
+    <child>
+        <name>
+        <firstname>Ira</firstname>
+        <secondname>Violet</secondname>
+        </name>
+        <class>A</class>
+    </child>
+    <child>
+        <name>
+        <firstname>Ira2</firstname>
+        <secondname>Violet2</secondname>
+        </name>
+        <class>B</class>
+    </child>
+</school>
+
+https://jsonformatter.org/
+
+{
+  "catalog": [
+    {
+      "name": "apple",
+      "weight": 1000,
+      "group": "fruits",
+      "price": 150,
+      "number": 1
+    },
+    {
+      "name": "potatos",
+      "weight": 1000,
+      "group": "veg",
+      "price": 150,
+      "number": 1
+    }
+    ]
+}
+
+{
+  "quary": "Виктор",
+  "count": 10,
+  "parts": ["NAME","SURNAME"]
+}
+
+{
+  "list": [
+    {
+      "firstname": "ivan",
+      "secondname": "petrov",
+      "age": "37",
+      "hobby": "555",
+      "children": ["23, 24"]
+    },
+        {
+      "firstname": "ivan",
+      "secondname": "petrov",
+      "age": "37",
+      "hobby": "",
+      "children": null
+    }
+    ]
+}
+{
+  "list": [
+    {
+      "firstname": "ivan",
+      "secondname": "petrov",
+      "age": "37",
+      "hobby": "555",
+      "children": ["23, 24"]
+    },
+        {
+      "firstname": "ivan",
+      "secondname": "petrov",
+      "age": "37",
+      "hobby": "",
+      "children": []
+    }
+    ]
+}

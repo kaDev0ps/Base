@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson7</title>
+</head>
+<style>
+    .heading {
+        color: aliceblue;
+        text-transform: uppercase;
+        background-color: #ccc;
+    }
+</style>
+
+<body>
+    <div class="content"></div>
+    <script>
+        const content = document.querySelector('.content');
+        const h1El = document.createElement('h1');
+        h1El.textContent = 'h1 element';
+        h1El.style.background = 'grey';
+        h1El.style.textAlign = 'center';
+        h1El.setAttribute('class', 'heading');
+
+        const imgEl = document.createElement('img');
+        // imgEl.src = 'photo.png';
+        imgEl.setAttribute('alt', 'foto');
+        content.appendChild(imgEl);
+
+
+        content.appendChild(h1El);
+    </script>
+    <ul class="menu">
+        <li class="menu_list">
+            <a href="#" class="menu_link">
+                Link 1</a>
+        </li>
+        <li class="menu_list">
+            <a href="#" class="menu_link">
+                Link 2</a>
+        </li>
+    </ul>
+    <script>
+        const liEl = document.querySelectorAll('.menu_list');
+        const liElone = document.querySelector('.menu_list');
+        const linkEl = document.querySelector('.menu_link');
+        const menuEl = document.querySelector('.menu');
+
+        console.log(linkEl.children);
+        console.log(linkEl.childNodes);
+
+        console.log(menuEl.children);
+        console.log(menuEl.childNodes);
+
+        console.log(liEl);
+        console.log(liElone.parentNode.children);
+    </script>
+</body>
+
+</html>

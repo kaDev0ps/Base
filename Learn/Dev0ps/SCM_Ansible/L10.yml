@@ -1,0 +1,58 @@
+# Настройка ролей
+Создаем папку roles в корневом разделе ansible, переходим в нее и выполняем команду
+ansible-galaxy init deploy_apache
+.
+└── deploy_apache
+    ├── defaults
+    │   └── main.yml
+    ├── handlers
+    │   └── main.yml
+    ├── meta
+    │   └── main.yml
+    ├── README.md
+    ├── tasks
+    │   └── main.yml
+    ├── tests
+    │   ├── inventory
+    │   └── test.yml
+    └── vars
+        └── main.yml
+
+# наша задача раскидать файлы playbook по данным каталогам
+мы можем сосздать свои директории, например templates и files
+ В Итоге файл playbook получим следующий
+
+ ---                                                                                                                │
+ - name: InstallApache and copy foto                                                                               │
+   hosts: all                                                                                                      │
+   become: yes                                                                                                     │
+                                                                                                                   │
+   roles:                                                                                                          │
+     - { role: deploy_apache, when: ansible_system == 'Linux'}          
+
+Все файлы распакованы в стандартные каталоги
+
+17:38 ka@test:~/ansible$ tree
+.
+├── ansible.cfg
+├── group_vars
+│   ├── servers_ALL
+│   ├── stagin_servers
+│   └── vpn_servers
+├── hosts
+├── playbook.yml
+├── roles
+│   └── deploy_apache
+│       ├── files
+│       │   └── foto.jpg
+│       ├── handlers
+│       │   └── main.yml
+│       ├── tasks
+│       │   └── main.yml
+│       ├── templates
+│       │   └── index.j2
+│       └── vars
+│           └── main.yml
+└── VPN.pem
+
+

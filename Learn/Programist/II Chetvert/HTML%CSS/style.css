@@ -1,0 +1,51 @@
+a {
+    /* text-decoration:none;*/
+}
+.menu {
+    color: cornflowerblue;
+    font-size: 16px;
+    font-family: Arial, Verdana, sans-serif;
+    line-height: 20px;
+  }
+  H1 {
+    color: #222222;
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: bold;
+  }
+  p {
+    color: #7d7987;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: bold;
+    font-weight: 300;
+    font-style: normal;
+  }
+  .header2 {
+    color: coral;
+    font-style: normal;
+    line-height: 80px;
+    font-weight: 700;
+    font-size: 36px;
+  }
+  .image {
+    border-radius: 10px;
+    width: 150px;
+  }
+  .forma {
+    width: 200px;
+    height: 30px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 30px;
+  }
+  .buttom {
+    width: 100px;
+    height: 30px;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    translate: -105px;
+  }

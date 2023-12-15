@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sem8</title>
+</head>
+<button class="content">BUTTON</button>
+<button class="content2">BUTTON2</button>
+<button class="content3">BUTTON3</button>
+<button class="content1">BUTTON5</button>
+<button class="content1">BUTTON4</button>
+<button class="content1">BUTTON1</button>
+<button class="butAdd">BUTTON7</button>
+<button class="butRemove">BUTTON8</button>
+<button class="butHover">BUTTON9</button>
+<button class="content10">BUTTON10</button>
+
+<body>
+    <script>
+        // Создать кнопку
+        const content = document.querySelector(".content");
+
+        // После загрузки вывести в консоль КОНЕЦ ХАГРУЗКИ
+        document.addEventListener('DOMContentLoaded', function (e) {
+            console.log('PAGE');
+        });
+        // Добавить событие oncklick
+        content.onclick = function () {
+            console.log('event onclick');
+        };
+        // Добавить событие addEvenListener, которое выводит в консоль 
+        content.addEventListener('click', function (e) {
+            console.log('event addEventListener');
+        });
+    </script>
+    <script>
+        // Создать 3 кнопки
+        // Добавить клик по кнопке, чтобы выводилась именно та на которую нажали
+        const content1 = document.querySelectorAll(".content1");
+        content1.forEach(el => {
+            el.addEventListener('click', function (event) {
+                const target = event.target;
+                const text = target.textContent;
+                console.log(`PRESSED BUTTON ${text}`);
+            });
+        });
+
+        // Добавить 4 кнопку, которая считает, сколько на нее нажали
+        const content3 = document.querySelector(".content3");
+        let count = 0;
+        content3.addEventListener('click', function () {
+            content3.textContent = `Нажали ${++count}`
+        });
+        // Добавить 5 кнопки при нажатии меняется текст на кнопке
+        const content2 = document.querySelector(".content2");
+        content2.addEventListener('click', function () { content2.textContent = 'PRESS BUTTON' });
+    </script>
+    <script>
+        // Создать кнопку, которая добавляет заголовок при нажатии
+        const butAdd = document.querySelector(".butAdd");
+        const header = document.createElement("h3");
+        header.textContent = 'New Header';
+
+        butAdd.addEventListener('click', function () {
+            butAdd.after(header);
+        });
+        // Кнопка, которая удаляет этот заголовок
+        const butRemove = document.querySelector(".butRemove");
+        butRemove.addEventListener('click', function () {
+            header.remove();
+        });
+        // Кнопка при наведении на которую выводиться надпись в консоль. Если снять наведение надпись убирается из консоли.
+        const butHover = document.querySelector(".butHover");
+        butHover.addEventListener('mouseover', function () {
+            console.log('hover on button');
+        });
+        butHover.addEventListener('mouseout', function () {
+            console.log('hover no more');
+        });
+    </script>
+    <button class="add-header">BTN1</button>
+    <button class="remove-header">BTN2</button>
+    <button class="btn">BTN3</button>
+    <ul class="list">
+        <li>tezt 1</li>
+    </ul>
+    <script>
+        // Создать html список из 3 элементов li
+
+        // Кнопка, добавляет элементы списка с текстом 'новый элемент'
+        const butAdd2 = document.querySelector('.add-header');
+        butAdd2.addEventListener('click', function () {
+            const item = document.createElement("li");
+            item.textContent = 'new list';
+            list.appendChild(item);
+        });
+        // Кнопка удаляет первый элемент из списка
+        const butRemove2 = document.querySelector('.remove-header');
+        butRemove2.addEventListener('click', function () {
+            list.removeChild(list.firstElementChild);
+        });
+        // Кнопка при клике на которую добавляется ей класс click
+        const list = document.querySelector('.list');
+        const butClick = document.querySelector('.btn');
+        butClick.addEventListener('click', function (e) {
+            butClick.classList.add('click');
+        });
+    </script>
+</body>
+
+</html>

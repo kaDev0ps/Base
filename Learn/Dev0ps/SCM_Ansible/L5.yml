@@ -1,0 +1,66 @@
+# Пишем playbook для hosts
+# Проверяем доступность сереров
+---
+- name: Test Connected
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Ping servers
+      ping:
+# Запускаем команду 
+ansible-playbook playbook.yml
+
+# Создадим playbook для устаноки appache для CentOS
+---
+ - name: Install appache
+   hosts: all
+   become: yes
+
+   tasks:
+
+   - name: Install appache Webserver
+     yum: name=httpd state=latest
+
+   - name: Start appache after boot
+     service: name=httpd state=started enabled=yes
+
+# Настройка фаервола Centos
+Для корректной работы установленного веб сервера необходимо открыть порты, используемые по умолчанию в файрволе, следующими командами от root:
+
+firewall-cmd --zone=public --permanent --add-service=http
+
+firewall-cmd --zone=public --permanent --add-service=https
+
+firewall-cmd --reload
+
+# Профессиональный playbook
+
+Мы создаем несколько задач. Во второй задаче мы делаем рестарт appache если файл обновился
+
+---
+ - name: InstallApache and copy foto
+   hosts: linux_CentOS
+   become: yes
+
+   vars:
+    source_file: /home/ka/ansible/index.html
+    destin_file: /var/www/html
+
+
+   tasks:
+
+   - name: Install Apache Web Server
+     yum: name=httpd state=latest
+
+   - name: Copy My index.html
+     copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+     notify: Restarted Apache
+
+   - name: Start WebServer and make it enable on boot
+     service: name=httpd state=started enabled=yes
+
+   handlers:
+
+   - name: Restarted Apache
+     service: name=httpd state=restarted

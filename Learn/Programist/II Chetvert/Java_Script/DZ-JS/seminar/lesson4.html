@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Выполняем условие определенне количество враз
+        let count = 0;
+        while (count < 3) {
+            console.log('Hello');
+            count++;
+        }
+    </script>
+    <script>
+        // Правильное выполнение
+        for (let i = 0; i < 3; i++) {
+            console.log('Hello for');
+        }
+    </script>
+    <script>
+        // Правильное выполнение с 2 переменными
+        for (let j = 0; j <= 2; j++) {
+            console.log(j);
+        }
+    </script>
+    <script>
+        // Спрашиваем пароль, а потом проверяем
+        let pass;
+        let count2 = 0;
+        do {
+            if (count2 >= 3) {
+                alert('Пароль неверный');
+            }
+            pass = Number(prompt('Введите пароль'));
+            count2++;
+        }
+        while (pass !== 123); // Если пароль не равен 123 то будет снова спрашивать.
+    </script>
+    <button onclick="counterClickButtons();">Click</button>
+    <script>
+        // Считаем сколько нажатий на кнопку
+        let countBut = 0;
+        alert(`Вы наали на кнопку ${countBut} раз`);
+        function counterClickButtons() {
+            alert(++countBut);
+            console.log(countBut);
+        }
+    </script>
+
+    <script>
+        const arr = [1, 2, `hello`];
+        console.log(arr);
+        console.log(arr[2]);
+        console.log(arr.length - 1);
+    </script>
+    <script>
+        // Записываем в массив данные пользователя
+        const user = [];
+        const userName = prompt(`Your name?`);
+        const userAge = prompt(`Your age?`);
+        user.push(userName);
+        user.push(userAge);
+        console.log(user);
+    </script>
+    <script>
+        // Упрощаем код
+        const user2 = [];
+        user.push(prompt(`Your name?`));
+        user.push(Number(prompt(`Your age?`)));
+        console.log(user2);
+    </script>
+    <script>
+        // Выводим последнее значение из массива
+        const numbers = [2, 3, 5];
+        console.log(numbers);
+        alert(`Запомни ${numbers}`);
+        console.log(numbers[numbers.length - 1]);
+    </script>
+    <script>
+        // Упрощаем вывод последнее значение из массива
+        const numbers2 = [2, 3, 5];
+        console.log(numbers2);
+        alert(`Запомни ${numbers2}`);
+        console.log(numbers2.pop());
+        console.log(numbers2);
+    </script>
+    <script>
+        // Упрощаем вывод последнее значение из массива
+        const word = 'example';
+        console.log(word.split('')); // каждую букву зансим в массив
+        const arrWord = word.split('');
+        // console.log(arrWord.pop());
+        // console.log(arrWord.join());
+        // console.log(arrWord.join(''));
+        const upWord = arrWord.pop();
+        console.log(upWord.toLocaleUpperCase());
+        //
+        arrWord.push(upWord.toLocaleUpperCase());
+        console.log(arrWord.join(''));
+
+    </script>
+    <script>
+        // выдернуть значения из массива
+        const arrSlice = [1, 2, 3, 4, 5];
+        console.log(arrSlice);
+        console.log(arrSlice.slice(0, 2));
+    </script>
+
+    <script>
+        // поиск по массиву
+        const arrSearch = [1, 2, 3, 4, 5];
+        for (let i = 0; i < arrSearch.length; i++) {
+            const element = arrSearch[i];
+            console.log(element);
+        }
+    </script>
+    <script>
+        // выводим значения >5
+        const arrSearch2 = [1, 2, 3, 54, 5];
+        for (let i = 0; i < arrSearch2.length; i++) {
+            const elem = arrSearch2[i];
+            if (elem >= 5) {
+                console.log(elem);
+            } else {
+                continue;
+            }
+
+        }
+    </script>
+    <script>
+        // загадка
+        const arrAnswer2 = ['елка', 'ель'];
+        const userAnswer2 = prompt('Зимой зеленая');
+        for (let i = 0; i < arrAnswer2.length; i++) {
+            const elem2 = arrAnswer2[i];
+            if (elem2 === userAnswer2) {
+                console.log('Good!!!');
+                break;
+
+            } else {
+                continue;
+            }
+        }
+
+    </script>
+</body>
+</body>
+
+</html>

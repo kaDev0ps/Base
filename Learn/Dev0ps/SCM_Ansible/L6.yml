@@ -1,0 +1,69 @@
+# Проверяем на Debug
+Делаем Плэйлист. Переменные мы можем обозначать в файлах host, playbook, а лучше всего  group_vars
+---
+- name: My Debug playbook
+  hosts: all
+  become: yes
+
+  vars:
+    message: Privet
+    mes2: Girl
+    mes: Boy
+
+  tasks:
+    - name: Print mes
+      debug:
+        var: mes
+
+    - debug:
+        msg: "Sekretnoe slovo {{ message, mes2 }}"
+
+    - debug:
+        msg: "Peremennaya group {{ servers_ALL_vars }}"
+
+
+# Мы можем получить все переменные запустив команду
+ansible all -m setup
+
+# данные переменные можно подставлять и использовать в своих playbook
+
+Можно выполнять команды и результат сохранять в переменную
+
+---
+ - name: My Debug playbook
+   hosts: all
+   become: yes
+
+   vars:
+    message: Privet
+    mes2: Girl
+    mes: Boy
+
+   tasks:
+   - name: Print mes
+     debug:
+      var: mes
+
+   - debug:
+      msg: "Sekretnoe slovo {{ message, mes2 }}"
+
+   - debug:
+      msg: "Peremennaya group {{ servers_ALL_vars }}"
+
+   - set_fact: full_message="{{ message }} {{mes2}} {{mes}}"
+
+   - debug:
+      var: full_message
+
+   - debug:
+      var: ansible_distribution
+
+   - shell: uptime
+     register: result
+
+   - debug:
+      var: result.stdout
+
+# Можем выводить переменные только те, которые нам нужны, через
+.stdout
+

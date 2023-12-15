@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminar6</title>
+</head>
+
+<body>
+    <div id="block">
+        <p>1</p>
+        <p>2</p>
+    </div>
+    <script>
+        // Задание 1 
+        // Получите ссылку на первый абзац из дива с id выведите в консоль
+        const block = document.querySelector("#block").firstElementChild;
+        console.log(block);
+    </script>
+
+    <p class="www">1</p>
+    <p class="www">2</p>
+
+    <script>
+        // Получите ссылку на первый абзац с классом www и выведите в консоль
+        const www = document.querySelector(".www");
+        console.log(www);
+    </script>
+    <a class="link" href="#">Link</a>
+    <script>
+        // Задание 2
+        // Дан тег <a class="link" href="#">Link</a>. Нужно поменять текст внутри ссылки
+        // Заменить href на другую ссылку
+        // выведите в консоль
+        const linkNew = document.querySelector('a');
+        linkNew.href = 'newphoto.ru';
+        linkNew.text = 'Google';
+    </script>
+    <img class="photo" src="#" alt="">
+    <script>
+        // Дан тег <img class="photo" src="" alt="">
+        // Cменить cvtybnm src
+        const imgEl = document.querySelector('img');
+        imgEl.src = 'https://avatars.mds.yandex.net/i?id=b1ba5d199d0c1598bb5762fc6faf2f5526a0cf1a-5513755-images-thumbs&n=13&exp=1';
+    </script>
+    <div class="content"></div>
+    <script>
+        // Задание 3
+        // Дан тег <div class="content"></div>. 
+        // Создать элемент р
+        // Добавить в него текст
+        // Добавить созданный элемент внутри <div class="content"></div>
+        // Удалить добавленный элемент
+
+        /* Ловим селектор*/
+        const contentEl = document.querySelector('.content');
+        /* Создали параграф с текстом */
+        const textEl = document.createElement('p');
+        textEl.textContent = 'Тут большой текст';
+        contentEl.appendChild(textEl);
+        console.log(contentEl);
+        // textEl.remove();
+    </script>
+    <script>
+        // Задание 4
+        // Создать элемент button
+        // Добавить в блок <div class="content"></div>
+        // При клике выводиться количество нажатий
+        const contentEl2 = document.querySelector('.content');
+        const button = document.createElement('button');
+        button.textContent = "ЖМИ!!!";
+        contentEl2.appendChild(button);
+        /*
+        let count = 0;
+        console.log(`Вы нажали ${count} раз`);
+        button.onclick = function () {
+            count++;
+            console.log(`Вы нажали ${count} раз`)
+        }
+        */
+        /// Через Замыкание
+        button.onclick = (function () {
+            let count = 1;
+            return function () {
+                console.log(`Вы уже нажали`, count++)
+            }
+
+        })();
+    </script>
+    <script>
+        // Задание 5
+        // Создайте элемент button в <div class="content"></div>
+        // Добавьте текст для кнопки отправить
+        // При клике на кнопку текст меняется на Текст отправлен
+        const contentEl3 = document.querySelector('.content');
+        const button2 = document.createElement('button');
+        contentEl3.appendChild(button2);
+        button2.textContent = "Отправить?";
+        button2.onclick = function () {
+            button2.textContent = 'Текст отправлен';
+            contentEl3.appendChild(button2);
+
+        }
+        // количество отправленного текста
+        button2.onclick = (function () {
+            let count = 0;
+            return function () {
+                button2.textContent = 'Текст отправлен';
+                const p = document.createElement('p');
+                p.textContent = `Текст отправлен ${count} раз`;
+                contentEl3.appendChild(p);
+                console.log(`${button2.textContent} ${count++}`);
+            }
+        })();
+    </script>
+</body>
+
+</html>

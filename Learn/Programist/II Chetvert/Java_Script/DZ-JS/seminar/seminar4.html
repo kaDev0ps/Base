@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S4</title>
+</head>
+
+<body>
+    <script>
+        // массив с элементами 1.2.3 вывести на экран
+        const arr = [1, 2, 3];
+        for (let i = 0; i < arr.length; i++) {
+            console.log(arr[i]);
+        }
+    </script>
+    <script>
+        // массив с произвольными элементами вывести на экран их количество
+        console.log(`Длинна массива ${arr.length}`);
+    </script>
+    <script>
+        // в массив с элементами a.b.c записать 1.2.3 вывести в консоль
+        const words = ["a", "b", "c"];
+        console.log(words);
+        for (let i = 0; i < words.length; i++) {
+            words[i] = i + 1;
+        }
+        console.log(words);
+    </script>
+    <script>
+        // массив с элементами 1.2.3 увеличить каждый элемент на 1
+        const arr2 = [1, 2, 3];
+        for (let i = 0; i < arr2.length; i++) {
+            arr2[i] = i++;
+        }
+        console.log(arr2);
+    </script>
+    <script>
+        // массив с элементами 1.2.3 увеличить каждый элемент на 1
+        const arr3 = [];
+        arr3[3] = 'a';
+        arr3[8] = 'b';
+        console.log(`Длинна массива ${arr3.length}`);
+    </script>
+    <script>
+        // добавить в конец элемента массива элементы 4,5
+        const arr4 = [1, 2, 3];
+        arr4.push(4);
+        arr4.push(5);
+        console.log(arr4);
+    </script>
+    <script>
+        // создайте произвольный массив из 5 элементов и удалите 2 элемента. Проверить значение length
+        arr4.pop();
+        arr4.pop();
+        console.log(arr4);
+    </script>
+    <script>
+        // вывести случайные числа c помощью цикла от 11 до 33 через for
+        for (let i = 11; i <= 33; i++) {
+            console.log(i);
+
+        }
+
+    </script>
+    <script>
+        // вывести нечетные числа с помощью цикла for от 1 до 99
+        // проверка на корректность значения
+        const isCorrect = (variable) => {
+            return true;
+        }
+        for (let k = 1; k <= 99; k++) {
+            if (k % 2 === 1) {
+
+                console.log(k);
+            }
+        }
+    </script>
+    <script>
+        // вывести числа с помощью цикла for от 100 до 0
+        for (let l = 100; l >= 0; l--) {
+            console.log(l);
+
+        }
+    </script>
+    <script>
+        // число num умнажать его на 3 пока результат >1000. Вывести полученное число и посчитать количество интераций.
+        let num = Math.floor(Math.random() * 100);
+        console.log(num);
+
+        let count = 0;
+        while (num <= 1000) {
+            num = num * 3;
+            count++;
+        }
+        console.log(num, count);
+    </script>
+    <script>
+        // массив arr5 =[2.5.6.8.7.4.9.2.1] вывести из массива элементы >3 <10
+        const arr5 = [2, 5, 9, 15, 1, 4];
+        for (let p = 0; p <= arr5.length; p++) {
+            if (arr5[p] > 3 && arr5[p] < 10) { console.log(arr5[p]); }
+        }
+    </script>
+    <script>
+        // найти сумму четных чисел от 2 до 100
+        sum = 0;
+        for (let q = 2; q <= 100; q = q + 2) {
+            sum = sum + q;
+        }
+        console.log(sum);
+    </script>
+    <script>
+        // найти сумму элементв массива 2,5,4,7,8,5
+        const arr6 = [2, 5, 9, 3, 1, 4];
+        sum1 = 0;
+        for (let w = 0; w < arr6.length; w++) {
+            sum1 = sum + arr6[w];
+        }
+        console.log(`Сумма ${sum1}`);
+    </script>
+    <script>
+        // с помощью цикла сформировать строку -1-2-3-4-5-
+        const arr7 = [];
+        for (let e = 1; e <= 9; e++) {
+            arr7.push(-e);
+
+        }
+        arr7.push('-');
+        let str1 = arr7.join('');
+        console.log(str1);
+    </script>
+    <script>
+        // дан массив 2,5,4,6,0,4,5,8. Запустить цикл, который выводит элементы пока не встретит элемент 0
+        const arr8 = [2, 5, 9, 0, 3, 1, 4];
+        for (let r = 0; r < arr8.length; r++) {
+            if (arr8[r] !== 0) console.log(arr8[r]);
+            else break;
+        }
+    </script>
+    <script>
+        // массив с 10 элементами с произвольными числами. Числа, которые делятся на 
+        // 2 возведенм в квадрат и выведем в консоль, а числа, которые делятся на 3 возведем в куб и выведим в консоль.
+        const arr9 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+        console.log(arr9);
+        for (let t = 0; t < arr9.length; t++) {
+            if (arr9[t] % 2 === 0) {
+                console.log(Math.pow(arr9[t], 2));
+            }
+            if (arr9[t] % 3 === 0) {
+                console.log(Math.pow(arr9[t], 3));
+            }
+        }
+    </script>
+    <script>
+        // с помощью двух вложенных циклов вывести строку 112321233123
+
+        let str02 = "";
+        for (let y = 1; y <= 3; y++) {
+            str02 += y;
+        }
+        let str2 = "";
+        for (let y = 1; y <= 3; y++) {
+            str2 += y;
+            for (let u = 1; u <= 3; u++) {
+                str2 += u;
+
+            }
+        }
+        console.log(str02);
+        console.log(str2);
+    </script>
+    <script>
+        // массив 1,2,3,2,4,3,5,6,3,2,3. Посчитайте количество 3 в массиве
+        const arr10 = [1, 2, 3, 2, 4, 3, 5, 6, 3, 2, 3];
+        let sumTree = 0;
+        for (let o = 0; o < arr10.length; o++) {
+            if (arr10[o] === 3) {
+                sumTree++;
+            }
+
+        }
+        console.log(sumTree);
+    </script>
+    <script>
+        // массив 1,2,3,4,5 преобразовать в 1,4,5 методом splice
+        const arr11 = [1, 2, 3, 4, 5];
+        arr11.splice(1, 2); // удаляет элементы под индексами
+        console.log(arr11);
+    </script>
+</body>
+
+</html>

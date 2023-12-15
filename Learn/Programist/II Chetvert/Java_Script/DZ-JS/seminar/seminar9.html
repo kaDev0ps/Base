@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9</title>
+</head>
+<!-- <form class="form">
+    <label>Тестовый checkbox: <input id="agree" type="checkbox"></label> <br>
+    <button class="submit">Sent</button>
+
+</form> -->
+
+<form class="form">
+    <label>Тестовый checkbox: <input id="checkbox" type="checkbox"></label> <br>
+    <button class="task1Button">Sent</button>
+
+</form>Sent</button>
+
+</form>
+
+<body>
+    <script>
+        // В html документе создать checkbox и текст рядом с ним "СОггасен"
+        // Добавить кнопку Отправить
+        // При клике на кнопку проверяется стоит ли галочка в чекбоксе
+        // если галочки нет, то сообщать, что нужно галочка
+        /*
+                const butClick = document.querySelector('.submit');
+                butClick.addEventListener('click', function () {
+                    const check = document.querySelector('#agree');
+                    const agreeText = document.createElement('p');
+                    agreeText.textContent = 'Need Agree';
+                    console.log(agreeText)
+                    if (!check.checked);
+                    {
+                        document.querySelector('.form').appendChild(agreeText);
+                    }
+                });*/
+
+        const button = document.querySelector('.task1Button');
+        button.addEventListener('click', () => {
+            const checkbox = document.querySelector('#checkbox');
+            if (!checkbox.checked) {
+                const divAlert = document.createElement('div');
+                const content = document.createTextNode("Нужно согласие");
+                divAlert.appendChild(content);
+                document.body.appendChild(divAlert);
+                console.log(divAlert)
+            };
+        }
+        );
+    </script>
+
+    <form action="drink">
+        <fieldset class="drinks">
+            <label for="tea">tea</label>
+            <input type="radio" name="drink" id="tea" value="tea">
+            <label for="coffee">Coffee</label>
+            <input type="radio" name="drink" id="coffee" value="coffee">
+            <button class="Button">Sent</button>
+        </fieldset>
+    </form>
+    <div>
+        <label for="tea">tea</label>
+        <input type="radio" name="order" id="tea" value="tea"> <br>
+        <label for="coffee">Coffee</label>
+        <input type="radio" name="order" id="coffee" value="coffee">
+        <button class="task2Button">Sent</button>
+        </fieldset>
+    </div>
+    <script>
+        // В html документе создать 2 элемента радио кнопки (input type="radio") и текст Чай Кофе
+        // Добавить кнопку Отправить
+        // Если выбран Чай то вывести сообщение Чай кончился
+        // если кофе, то Кофе кончился
+        const button2 = document.querySelector('.task2Button');
+        const valueMap = new Map();
+        const tea = 'tea';
+        const coffee = 'coffee';
+        const else2 = "else2";
+        valueMap.set(tea, 'tea is over');
+        valueMap.set(coffee, 'coffee is over');
+        valueMap.set(else2, 'else2 is over');
+        button2.addEventListener('click', () => {
+            const teaElement = document.querySelector('#tea');
+            const coffeeElement = document.querySelector('#coffee');
+            const result = document.querySelector('input[name="order"]:checked');
+            if (result) {
+                const textValue = valueMap.get(result.value);
+                addTextDevToBody(textValue);
+                return;
+            }
+            addTextDevToBody('pick value')
+        });
+        function addTextDevToBody(value) {
+            const divAlert = document.createElement('div');
+            const content = document.createTextNode(value);
+            divAlert.appendChild(content);
+            document.body.appendChild(divAlert);
+        }
+
+        /*
+                const butClick2 = document.querySelector('.submit2');
+                butClick2.addEventListener('click', function (e) {
+        
+                    e.preventDefault();
+        
+                    const tea = document.querySelector('#tea');
+                    const coffee = document.querySelector('#coffee');
+                    if (!tea.checked);
+                    {
+                        console.log("tea over")
+                    }
+                    if (!coffee.checked);
+                    {
+                        console.log("coffee over")
+                    }
+                });
+                */
+               // Создать поле ввода ПАРОЛЬ
+// Добавить кнопку Отправить
+// Если вводишь ПАРОЛЬ, то поле ввода зеленым цветом обводиться
+// если пароль неверный то поле с красной обводкой и текст НЕВЕРНЫЙ!
+    </script>
+    <label for="password">Enter password</label>
+                <input type="text" id="password">
+                <button class="submit3">Sent</button>
+                <br>
+                <label>4 Task</label>
+                <input type="text" name="text" id="text2">
+                <h1 class="title">Sent</h1>
+    <script>
+                        const butClick3 = document.querySelector('.submit3');
+                butClick3.addEventListener('click', function (e) {
+e.preventDefault();
+                    const password = document.querySelector('#password');
+                    password.value=='password' ?
+                    (password.style.borderColor = 'green') :
+                    (password.style.borderColor = 'red');
+                    
+                });
+
+                // Создать поле ввода и под ним заголовок Р1 с тектом
+                // При вводе текста в поле нужно, чтобы текст внутри заголовка менялся
+                const textField =document.querySelector('#text2');
+                const header = document.querySelector('.title');
+
+                textField.addEventListener("input", (e) => {
+                    e.preventDefault();
+                    console.log(e.target);
+                header.textContent=textField.value;
+                    header.style.color=textField.value;
+                });
+
+                textField.addEventListener("keypress", (e) => {
+                    var key = e.charCode || e.keyCode || 0;
+                    if (key ==13) {
+                        alert('NOOO its FAIL');
+                        return false;
+                    }
+                });
+
+    </script>
+
+
+</body>
+
+</html>
