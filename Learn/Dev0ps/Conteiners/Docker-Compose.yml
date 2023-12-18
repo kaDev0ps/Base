@@ -1,0 +1,49 @@
+# Описание
+
+Быстрая настройка и запуск различных сред разработки Docker. Помогает облегчить:
+Запуск
+Обновление
+Соединение 
+удаление контейнеров
+
+# Use root/example as user/password credentials
+docker-comppose up -d
+
+version: '3.1'
+
+services:
+
+  adminer: 
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  db:
+    image: mysql:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+# Мы можем создать образ через Dockerfile и использовать его как основу для docker-compose
+
+# В Dockerfile для db указываем
+FROM some-mariadb
+# В Dockerfile для adminer указываем
+FROM adminer
+
+version: '3.1'
+
+services:
+
+  adminer: 
+    build: ../adminer
+    restart: always
+    ports:
+      - 6080:8080
+
+  db:
+    build: ../db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 987654321

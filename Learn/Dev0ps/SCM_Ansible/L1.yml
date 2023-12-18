@@ -1,0 +1,42 @@
+#Настройка подключения по SSH на СЕРВЕРЕ!
+ssh-keygen 
+ssh-copy-id ka@172.21.0.101 копируем ключ на удаленный пк
+
+#Настройка подключения по SSH на КЛИЕНТЕ
+
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# Отключаем по паролю вход на СЕРВЕРЕ!
+sudo vi /etc/ssh/sshd_config
+PasswordAuthentication no
+sudo service sshd restart
+
+
+# Управление клиентом через Ansible
+Зоздадим папку ansible, а в ней inventory. Именно она является основной папкой в котором наши хосты.
+создаем в ней текстовый файл hosts c описанием групп и хостов для подключения
+
+[stagin_servers]
+linux1 ansible_host=172.21.1.188 ansible_user=ka ansible_ssh_private_key_file=/home/ka/.ssh/id_rsa
+
+[aws_servers]
+linux1 ansible_host=172.21.1.188 ansible_user=ka ansible_ssh_private_key_file=/home/ka/aws.pem
+
+# Запускаем команду ping из директории ansible
+ ansible -i hosts all -m ping
+ где
+ i - наш inventory
+ all - все группы
+ m - модуль ping
+
+# Для того, чтобы каждый раз не выпадало меню с согласием подключения можно созлать config файл 
+
+nano ansible.cfg 
+
+[defaults]
+host_key_cheking = false
+inventory        = ./hosts
+
+
+

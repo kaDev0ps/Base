@@ -1,0 +1,258 @@
+#Настройка подключения по SSH на СЕРВЕРЕ!
+ssh-keygen 
+ssh-copy-id ka@172.21.0.101 копируем ключ на удаленный пк
+
+#Настройка подключения по SSH на КЛИЕНТЕ
+
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# Отключаем по паролю вход на СЕРВЕРЕ!
+sudo vi /etc/ssh/sshd_config
+PasswordAuthentication no
+sudo service sshd restart
+
+# Включим пользователя в sudo, чтобы моно было делать любые команды через ansible
+# зайдем на клиенте в /etc/sudoers и в конец добавим строку
+ka ALL=(ALL) NOPASSWD:ALL
+
+================================================================
+
+# Создаем папку и хосты
+mkdir inventory
+cd inventory
+touch hosts.txt
+# Создаем наши группы и включаем в них сервера
+[stagin_servers]
+linux_CentOS ansible_host=172.21.1.188
+
+[vpn_servers]
+linux_AWS ansible_host=23.22.15.47
+
+[servers_ALL:children]
+stagin_servers
+vpn_servers
+
+# Создаем файл ansible.cfg и в нег прописываем стандартную конфигурацию
+[defaults]
+host_key_cheking = false
+inventory        = ./hosts
+
+# Настройка групп
+Создаем директориб group_vars и в нее переносим переменные с hosts. Файлы должны называться так же, как и группа серверов
+mkdir group_vars
+
+├── ansible.cfg
+├── group_vars
+│   ├── servers_ALL
+│   ├── stagin_servers
+│   └── vpn_servers
+├── hosts.txt
+
+### stagin_servers
+---
+ansible_user                   : ka
+ansible_ssh_private_key_file   : /home/ka/.ssh/id_rsa
+
+### vpn_servers
+---
+ansible_user                 : ubuntu
+ansible_ssh_private_key_file : /home/ka/inventory/cert/VPN.pem
+
+# Проверка соединения
+ansible all -m ping
+
+# Создадим playbook для устаноки appache для CentOS
+---
+ - name: Install appache
+   hosts: all
+   become: yes
+
+   tasks:
+
+   - name: Install appache Webserver
+     yum: name=httpd state=latest
+
+   - name: Start appache after boot
+     service: name=httpd state=started enabled=yes
+# Настройка фаервола Centos
+Для корректной работы установленного веб сервера необходимо открыть порты, используемые по умолчанию в файрволе, следующими командами от root:
+
+firewall-cmd --zone=public --permanent --add-service=http
+
+firewall-cmd --zone=public --permanent --add-service=https
+
+firewall-cmd --reload
+
+##Основные команды
+# Чтобы посмотреть файд inventory
+ansible-inventory --list
+ansible-inventory --graph
+# Ad-Hoc команды - Произвольные команды
+ansible all -m ping
+ansible vpn_servers -m setup
+ansible all -m shell -a "uptime"
+
+# Установка apache на все сервера
+ansible linux_CentOS -m yum -a "name=httpd state=latest" -b
+# Запуск сервиса httpd при перезагрузке
+ansible linux_CentOS -m service -a "name=httpd state=started enabled=yes" -b
+# Копирование файла
+ansible all -m copy -a "src=privet.txt dest=/home mode=400" -b
+# удаление файла
+ansible all -m file -a "path=home/privet.txt state=absent" -b
+# Скачивание на все сервера
+ansible all -m get_url -a "url=https://github.com/AveYo/MediaCreationTool.bat.git dest=/home" -b
+# установка пакетов Ubuntu / CentOS
+ansible all -m yum -a "name=stress state=installed" -b
+ansible linux_AWS -m apt -a "name=stress state=latest" -b
+# удаление пакетов
+ansible linux_AWS -m yum -a "name=stress state=removed" -b
+ansible linux_AWS -m apt -a "name=stress state=absent" -b
+
+------------------------------------
+------------------------------------
+------------------------------------
+------------------------------------
+------------------------------------
+------------------------------------
+------------------------------------
+------------------------------------
+# Пример playbook c обновлением файлов
+---
+ - name: InstallApache and copy foto
+   hosts: linux_CentOS
+   become: yes
+
+   vars:
+    source_file: /home/ka/ansible/index.html
+    destin_file: /var/www/html
+
+
+   tasks:
+
+   - name: Install Apache Web Server
+     yum: name=httpd state=latest
+
+   - name: Copy My index.html
+     copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+     notify: Restarted Apache
+
+   - name: Start WebServer and make it enable on boot
+     service: name=httpd state=started enabled=yes
+
+   handlers:
+
+   - name: Restarted Apache
+     service: name=httpd state=restarted
+
+
+----------------------------
+
+# Пример playbook c Блоками и условиями
+Мы можем разделить задания для CentOS и Ubuntu создав 2 блока и прописать условия выполнения
+---
+- name: InstallApache and copy foto
+  hosts: all
+  become: yes
+
+  vars:
+    source_file: /home/ka/ansible/index.html
+    destin_file: /var/www/html
+
+  tasks:
+    - name: Check version OS
+      debug: var="ansible_os_family"
+
+    - block: # ====BLOCK FOR REDHAT====
+        - name: Install Apache Web Server for RedHat
+          yum: name=httpd state=latest
+
+        - name: Copy My index.html
+          copy: src={{ source_file }} dest={{ destin_file }} mode=555
+          notify: Restarted Apache_RedHat
+
+        - name: Start WebServer for RedHat
+          service: name=httpd state=started enabled=yes
+      when: ansible_os_family == "RedHat"
+
+    - block: # ====BLOCK FOR UBUNTU====
+        - name: Install Apache WebServer for Ubuntu
+          apt: name=apache2 state=latest
+
+        - name: Copy My index.html
+          copy: src={{ source_file }} dest={{ destin_file }} mode=555
+          notify: Restarted Apache_Ubuntu
+
+        - name: Start WebServer for Ubuntu
+          service: name=apache2 state=started enabled=yes
+      when: ansible_os_family == "Debian"
+
+  handlers:
+    - name: Restarted Apache_RedHat
+      service: name=httpd state=restarted
+
+    - name: Restarted Apache_Ubuntu
+      service: name=apache2 state=restarted
+
+---------------------------------
+
+# Playbook : Загрузка каталого со всеми папками на сервера
+
+ ---
+ - name: InstallApache and copy foto
+   hosts: all
+   become: yes
+
+   vars:
+    source_folder: /home/ka/ansible/site
+    destin_folder: /var/www/html
+
+
+   tasks:
+
+   - name: Check version OS
+     debug: var="ansible_os_family"
+
+   - block: # ====BLOCK FOR REDHAT====
+       - name: Install Apache Web Server for RedHat
+         yum: name=httpd state=latest
+
+       - name: Start WebServer for RedHat
+         service: name=httpd state=started enabled=yes
+     when: ansible_os_family == "RedHat"
+
+   - block: # ====BLOCK FOR UBUNTU====
+       - name: Install Apache WebServer for Ubuntu
+         apt: name=apache2 state=latest
+
+       - name: Start WebServer for Ubuntu
+         service: name=apache2 state=started enabled=yes
+     when: ansible_os_family == "Debian"
+
+   - name: Copy My index.html
+     copy: src={{ source_folder }}/{{ item }} dest={{ destin_folder }} mode=555
+     loop:
+          - "index.html"
+          - "foto.jpg"
+     notify:
+          - Restarted Apache_Ubuntu
+          - Restarted Apache_RedHat
+# Мы можем не перечислять все файлы в ручную, а указать, что копировать нужно все файлы в указанной директоррии, тогда нажа задача изменится.
+  #  - name: Copy My index.html
+  #    copy: src={{ item }} dest={{ destin_folder }} mode=555
+       with_fileglob: "{{ source_folder}}/*.*"
+  #    notify:
+  #         - Restarted Apache_Ubuntu
+  #         - Restarted Apache_RedHat
+
+   handlers:
+
+       - name: Restarted Apache_RedHat
+         service: name=httpd state=restarted
+         when: ansible_os_family == "RedHat"
+
+       - name: Restarted Apache_Ubuntu
+         service: name=apache2 state=restarted
+         when: ansible_os_family == "Ubuntu"
+

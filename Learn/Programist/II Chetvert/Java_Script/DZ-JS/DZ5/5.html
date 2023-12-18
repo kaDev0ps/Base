@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Необходимо создать объект, в котором будут объединены два массива en и ru 
+так, чтобы в объекте ключами выступали значения из массива en, а значениями 
+объекта являлись значения из массива ru.
+-->
+  <script>
+    "use strict";
+
+    const en = [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat",
+      "sun",
+    ];
+    const ru = [
+      "понедельник",
+      "вторник",
+      "среда",
+      "четверг",
+      "пятница",
+      "суббота",
+      "воскресенье",
+    ];
+
+    let result = {};
+
+    en.map((item, index) => result[item] = ru[index])
+    console.log(result)
+  </script>
+</body>
+
+</html>

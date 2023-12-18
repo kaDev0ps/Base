@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8</title>
+</head>
+
+<body>
+
+    <button onclick="counter++;console.log(counter)">Increment counter</button>
+    <script>
+        let counter = 5
+        window.onload = () => {
+            console.log('Страница со всеми ресурсами загружена полностью.')
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Построение DOM-дерева завершено.')
+        })
+        const mouseEventListener = (event) => {
+            console.log(event.type, event.clientX, event.clientY)
+        }
+        document.addEventListener('click', mouseEventListener)
+        document.addEventListener('dblclick', { handleEvent: mouseEventListener })
+        document.addEventListener('contextmenu', mouseEventListener, true)
+        document.addEventListener('mouseenter', mouseEventListener, true)
+        document.addEventListener('mouseleave', mouseEventListener, true)
+        const throttle = (func, wait = 0) => {
+            let ticking = false
+            return (...args) => {
+                if (!ticking) {
+                    window.setTimeout(() => {
+                        func(...args)
+                        ticking = false
+                    }, wait)
+                    ticking = true
+                }
+            }
+        }
+        document.addEventListener('mousemove', throttle(mouseEventListener, 300),
+            true)
+    </script>
+    Представленный код выводит в консоль сообщение в момент построения DOM-дерева и во
+    время окончания полной загрузки страницы. Он также выводит тип события и позицию курсора
+    мыши для некоторых пользовательских событий типа MouseEvent.
+</body>
+<button>Кликни меня!</button>
+<script>
+    const button = document.querySelector('button')
+    const onceListener = () => {
+        console.log('Будет вызван только один раз с включённой опцией "once"')
+    }
+    const onceListenerManual = (event) => {
+        console.log('Будет вызван только один раз и удалён вручную через вызов removeEventListener')
+        event.target.removeEventListener('click', onceListenerManual)
+    }
+    button.addEventListener('click', onceListener, { once: true })
+    button.addEventListener('click', onceListenerManual)
+</script>
+<button>Кликни меня полностью!</button>
+<script>
+    const button = document.querySelector('button')
+    const listener = (event) => {
+        switch (event.eventPhase) {
+            case Event.CAPTURING_PHASE: {
+                console.log('Будет вызван во время фазы захвата')
+                break
+            }
+            case Event.BUBBLING_PHASE: {
+                console.log('Будет вызван во время фазы всплытия')
+                break
+            }
+            case Event.AT_TARGET: {
+                console.log('Будет вызван в фазе цели')
+                break
+            }
+        }
+    }
+    document.addEventListener('click', listener) // Фаза всплытия (bubbling phase)
+    document.addEventListener('click', listener, true) // Фаза захвата (capturing phase)
+    document.addEventListener('click', listener, { capture: true }) // Фаза захвата (capturing phase)
+    button.addEventListener('click', listener) // Фаза цели (target phase)
+</script>
+<ul>
+    <li>Первый</li>
+    <li>Второй</li>
+    <li>Третий</li>
+</ul>
+<script>
+    const list = document.querySelector('ul')
+    const listener = (e) => {
+        console.log(e.target, e.currentTarget)
+    }
+    list.addEventListener('click', listener)
+    ['fourth', 'fifth'].forEach((text) => {
+        const listItem = document.createElement('li')
+        listItem.append(text)
+        list.append(listItem)
+    })
+</script>
+
+</html>

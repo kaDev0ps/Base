@@ -1,0 +1,66 @@
+# Работа с переменными
+На каждом сервере есть свои переменные. Мы хотим, чтоб на каждом сайте они использовались
+Исправляем файл hosts ( owner=Petya). Вносим в него переменные
+# Можем вносить переменные в group_vars ( owner: "Petya")
+Изменяем файл index.html вставляя в него переменные {{ owner }}
+Меняем наш playbook.
+Команда
+template: src={{ source_folder }}/index.j2 dest={{ destin_folder }}/index.html mode=555
+Копирует файл, подставляет в него значения и переименовывает. Тоже самое, что copy только может конфигурировать.
+---
+ - name: InstallApache and copy foto
+   hosts: all
+   become: yes
+
+   vars:
+    source_folder: /home/ka/ansible/site
+    destin_folder: /var/www/html
+
+
+   tasks:
+
+   - name: Check version OS
+     debug: var="ansible_os_family"
+
+   - block: # ====BLOCK FOR REDHAT====
+       - name: Install Apache Web Server for RedHat
+         yum: name=httpd state=latest
+
+       - name: Start WebServer for RedHat
+         service: name=httpd state=started enabled=yes
+     when: ansible_os_family == "RedHat"
+
+   - block: # ====BLOCK FOR UBUNTU====
+       - name: Install Apache WebServer for Ubuntu
+         apt: name=apache2 state=latest
+
+       - name: Start WebServer for Ubuntu
+         service: name=apache2 state=started enabled=yes
+     when: ansible_os_family == "Debian"
+
+   - name: Generate index.html
+     template: src={{ source_folder }}/index.j2 dest={{ destin_folder }}/index.html mode=555
+     notify:
+          - Restarted Apache_Ubuntu
+          - Restarted Apache_RedHat
+
+
+#   - name: Copy My index.html
+#     copy: src={{ item }} dest={{ destin_folder }} mode=555
+#     with_fileglob: "{{ source_folder}}/*.*"
+#     loop:
+#          - "index.html"
+#          - "foto.jpg"
+#     notify:
+#          - Restarted Apache_Ubuntu
+#          - Restarted Apache_RedHat
+
+   handlers:
+
+       - name: Restarted Apache_RedHat
+         service: name=httpd state=restarted
+         when: ansible_os_family == "RedHat"
+
+       - name: Restarted Apache_Ubuntu
+         service: name=apache2 state=restarted
+         when: ansible_os_family == "Ubuntu"

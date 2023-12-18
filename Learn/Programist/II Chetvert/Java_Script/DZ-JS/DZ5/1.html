@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Дан объект numbers. 
+Необходимо в консоль вывести все значения объекта, которые больше или равны 3.
+-->
+  <script>
+    "use strict";
+
+    const numbers = {
+      key1: 12,
+      key2: 2,
+      key3: 4,
+      key4: 1,
+      key5: -244,
+      key6: 0,
+      key7: 7,
+    }
+    for (let i in numbers) {
+      if (numbers[i] >= 3) {
+        console.log(numbers[i]);
+      }
+    }
+  </script>
+</body>
+
+</html>

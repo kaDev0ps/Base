@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6 DOM</title>
+</head>
+
+<body>
+    <h1 class="title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus pariatur corporis veritatis
+        distinctio, quaerat repellendus deserunt inventore, quibusdam minima tempora ullam dolorem totam impedit ipsa
+        commodi alias velit doloribus quos.</h1>
+    <h2 id="heading">Lorem 2</h2>
+    <ul class="ul">
+        <li class="list">text 1</li>
+        <li class="list">text 2</li>
+        <li class="list">text 3</li>
+        <li class="list">text 4</li>
+    </ul>
+    <p class="text">Lorem 50</p>
+    <p class="text">Lorem 50</p>
+    <p class="text">Lorem 50</p>
+    <p class="text">Lorem 50</p>
+    <script>
+        const heading2 = document.getElementById('heading'); // старый способ
+        console.log(heading2);
+        const heading3 = document.querySelector('#heading'); // новый способ
+        console.log(heading3);
+        const listEls = document.getElementsByClassName('list'); // новый способ
+        console.log(listEls);
+        const listElsQs = document.querySelectorAll('.list'); // новый способ
+        console.log(listElsQs);
+        //Вывод в консоль селектор
+        const heading = document.querySelector('.title');
+        const text = document.querySelectorAll('.text');
+        for (let i = 0; i < text.length; i++) {
+            console.log(text[i]);
+        }
+        text.forEach(element => {
+            console.log(element);
+        })
+        // console.log(heading);
+        // console.log(text);
+        ///////////////////////////////////////////
+        const sectionElement = document.querySelector('section');
+        const paragraphElement = document.createElement('h4');
+        paragraphElement.textContent = 'Новый текст параграфа';
+        console.log(paragraphElement);
+        // sectionElement.appendChild(paragraphElement);
+        // const paragraphElementText = document.createTextNode('Содержимое текстовой ноды') paragraphElement.appendChild(paragraphElementText)
+        ///////////////__Вставляем текст на страницу из JS__//////////////////
+        const titleEl = document.querySelector('.title');
+        titleEl.textContent = 'Заголовок из JS'
+        ///////////____Удаляем элемент____///////////
+        const heading4 = document.querySelector('#heading');
+        heading2.remove();
+        ///////////____Замена элемента____///////////
+        const divElement = document.createElement('div'); //создали элемент div
+        const paragraphElement2 = document.createElement('p');//создали параграф
+        divElement.appendChild(paragraphElement2); // в див добавляем параграф
+        const spanElement = document.createElement('span'); // создаем спан
+        const strongElement = document.createElement('strong');// создаем стронг
+        paragraphElement2.replaceWith(spanElement, strongElement); // внутри параграфа меняем спан на стронг
+        console.log(divElement.outerHTML) // вывод результата
+
+    </script>
+    <button class="btn">Купить</button>
+    <button class="btn2">Купить 2</button>
+    <div class="content">
+
+    </div>
+    <script>
+        const buttonEl = document.querySelector('.btn')
+        console.log(buttonEl);
+
+        buttonEl.onclick = function () {
+            console.log('Клик JS');
+            buttonEl.textContent = 'Товар в корзине';
+
+        }
+    </script>
+    <script>
+        const buttonEl2 = document.querySelector('.btn2')
+        /* Ловим селектор*/
+        const contentEl = document.querySelector('.content');
+        /* Создали параграф с текстом */
+        const textEl = document.createElement('p');
+        textEl.textContent = 'Тут большой текст';
+        buttonEl2.onclick = function () {
+            console.log('Клик JS');
+            buttonEl2.textContent = 'Товар в корзине';
+            contentEl.appendChild(textEl);
+
+        }
+
+    </script>
+    <img class="img" src="photo.jpg" alt="photo">
+    <script>
+        const imgEl = document.querySelector('.img');
+        imgEl.onclick = function () {
+
+            imgEl.src = 'newphoto.jpg';
+        }
+    </script>
+
+
+</body>
+
+</html>

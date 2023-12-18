@@ -1,0 +1,28 @@
+# Ad-Hoc команды - отдельные команды
+ansible all -m ping
+ansible vpn_servers -m setup
+ansible all -m shell -a "uptime"
+# a - аргумент
+# "любая linux"
+# Копирование файла
+ansible all -m copy -a "src=privet.txt dest=/home mode=400" -b
+# удаление файла
+ansible all -m file -a "path=home/privet.txt state=absent" -b
+# Скачивание на все сервера
+ansible all -m get_url -a "url=https://github.com/AveYo/MediaCreationTool.bat.git dest=/home" -b
+# установка пакетов Ubuntu / CentOS
+ansible all -m yum -a "name=stress state=installed" -b
+ansible linux_AWS -m apt -a "name=stress state=latest" -b
+# удаление пакетов
+ansible linux_AWS -m yum -a "name=stress state=removed" -b
+ansible linux_AWS -m apt -a "name=stress state=absent" -b
+# Проверка соединения с сайтом
+ansible all -m uri -a "url=https://andreyex.ru/operacionnaya-sistema-linux/9-poleznyh-primerov-komandy-touch-v-linux/" -b
+# Вывод страницы
+ansible all -m uri -a "url=https://andreyex.ru/operacionnaya-sistema-linux/9-poleznyh-primerov-komandy-touch-v-linux/ return_content=yes" -b
+
+# Установка apache на все сервера
+ansible linux_CentOS -m yum -a "name=httpd state=latest" -b
+# Запуск сервиса httpd при перезагрузке
+ansible linux_CentOS -m service -a "name=httpd state=started enabled=yes" -b
+# Для отображения выполнения команд добавляется в конце команды -vvvvv

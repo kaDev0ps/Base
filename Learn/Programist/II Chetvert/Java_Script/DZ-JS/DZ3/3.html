@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Необходимо попросить пользователя ввести три числа.
+Необходимо создать функцию, в которую мы должны передать эти три числа.
+Функция должна определить максимальное, среди переданных ей значение и 
+вывести сообщение: "Максимальное значение среди чисел N1, N2, N3 равно N."
+
+Примечание: Условимся, что пользователь всегда вводит корректные значения, 
+три числа. Проверять их не нужно.
+-->
+  <script>
+    "use strict";
+
+    let userNumber1 = prompt(`Your number1?`);
+    let userNumber2 = prompt(`Your number2?`);
+    let userNumber3 = prompt(`Your number3?`);
+
+
+    const isMax = (userNumber1, userNumber2, userNumber3) => {
+      return Math.max(userNumber1, userNumber2, userNumber3);
+    };
+    console.log(isMax(userNumber1, userNumber2, userNumber3));
+  </script>
+</body>
+
+</html>

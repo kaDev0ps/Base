@@ -1,0 +1,28 @@
+# Профессиональная настройка inventory
+Создаем директориб group_vars и d нее переносим переменные с hosts. Файлы должны называться так же, как и группа серверов
+mkdir group_vars
+# Файл с с хостами должен иметь только хосты, а переменные должны хранится отдельным файлом
+[stagin_servers]
+linux_CentOS ansible_host=172.21.1.188
+
+[vpn_servers]
+linux_AWS ansible_host=23.22.15.47
+
+[servers_ALL:children]
+stagin_servers
+vpn_servers
+
+
+
+# Вот такая структура является примером
+
+├── ansible.cfg
+├── group_vars
+│   ├── servers_ALL
+│   ├── stagin_servers
+│   └── vpn_servers
+├── hosts
+
+
+---
+

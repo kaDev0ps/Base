@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5</title>
+</head>
+
+<body>
+    <script>
+        // Задание 1
+        // Создать объект с ключами от 1 до 7. Хначение - дни недели. Вывести Вторник
+        const week2 = {
+            1: 'ПН',
+            2: 'ВТ',
+            3: 'СР',
+            4: 'ЧТ',
+            5: 'ПТ',
+            6: 'СБ',
+            7: 'ВС',
+        }
+        console.log(week2['2']);
+    </script>
+    <script>
+        // Создать объект user c ключами name, surname,age Вывести ФИО + возраст через дефис
+        const user = {
+            name: 'john',
+            surname: 'Wik',
+            age: 42
+        }
+        console.log(`${user.name}-${user.surname}-${user.age}`);
+    </script>
+    <script>
+        // Добавить в объект user свойство Отчество которое надо ввести с клавиатуры
+        user.fatherName = prompt("Отчество?");
+        console.log(user);
+    </script>
+    <script>
+        // Удалить surname
+        delete user.surname
+        console.log(user);
+    </script>
+    <script>
+        // Задание 2
+        // Даны 2 массива: первый с названиями дней недели, а второй - с их порядковыми номерами:
+        const arr1 = ['пн', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+        const arr2 = [1, 2, 3, 4, 5, 6, 7];
+        // C помощю цикла создайте объект, ключами которого будут названия дней, а значениями - их номера.
+        const week = {};
+        for (let i = 0; i < arr1.length; i++) {
+            week[arr1[i]] = arr2[i];
+        }
+        console.log(week);
+
+    </script>
+    <script>
+        // Перебрать объект циклом и возвести значения в квдрат
+        const obj = { x: 1, y: 2, z: 3 };
+        for (let key in obj) {
+            obj[key] = obj[key] * obj[key];
+
+        }
+        console.log(obj);
+    </script>
+
+    <script>
+        // Задание 3
+        // Найти сумму элементов объекта:
+        const obj2 = {
+            key1: {
+                key1: 1,
+                key2: 2,
+                key3: 3,
+            },
+            key2: {
+                key1: 4,
+                key2: 5,
+                key3: 6,
+            },
+            key3: {
+                key1: 7,
+                key2: 8,
+                key3: 9,
+            },
+        }
+        sum = 0;
+        /*
+        
+        for (let key in obj2) { // проходим по всем ключам
+            const inObj = obj2[key];
+            for (let key in inObj) {
+                sum = sum + inObj[key];
+            }
+        }
+        console.log(sum);
+        */
+        // Упрощаем
+        for (let k in obj2) { // проходим по всем ключам
+            for (let z in obj2[k]) {
+                sum = sum + obj2[k][z];
+            }
+        }
+        console.log(sum);
+    </script>
+
+    <script>
+        // Задание 4
+        // Создать объект riddles
+        const riddles = {
+            question: "сколько вам лет?",
+            answer: 11,
+            hints: ['1', '1'],
+            attempts: 0,
+            askQuestion: function () {
+                const userAnswer = prompt(this.question);
+                if (this.answer != userAnswer && this.attempts < 2) {
+                    alert(this.hints[this.attempts]);
+                    this.attempts++;
+                    this.askQuestion();
+                    return;
+                }
+                if (this.answer == userAnswer) {
+                    alert('WIM!');
+                } else alert('вы проиграли');
+                return;
+            }
+        }
+        riddles.askQuestion();
+        // alert.question = prompt("введи11");
+
+
+    // Добавить свойства question, answer
+    // Создать методaskQuestion который спрашиваету пользователя вопрос question и chfdybdftn jndtn c фтыцук
+    // Создать св-во hints (cодержащий 2 подсказки)
+    // Если пользователь ответил неверно ему дается одна подсказка
+    // Второй раз неверно - вторая подсказка
+    // Третий раз неверно - окно ВЫ ПРОИГРАЛИ
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

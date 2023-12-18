@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DZ7</title>
+</head>
+
+<body>
+    <!-- Задание 1 В блоке создать элемент div с классом item/ Разместить, текст ЭЕЛЕМЕНТ ВНУТРИ и задать стили: текст цвета синий, сплошная рамка цвет фона, внутренний отступ-->
+    <div class="block">TEXT</div>
+    <style>
+        .item_1 {
+            background: #ff0000;
+        }
+    </style>
+    <script>
+        const linkDiv = document.querySelector(".block");
+        console.log(linkDiv);
+        const divEl = document.createElement("div");
+        linkDiv.appendChild(divEl);
+        const parEl = document.createElement("p");
+        parEl.textContent = "Елемент внутри";
+        divEl.appendChild(parEl);
+
+        divEl.setAttribute("class", "item_1");
+        parEl.style.color = "blue";
+        parEl.style.background = "#f8f8f8";
+        parEl.style.padding = "20px";
+        parEl.style.textAlign = "center";
+        divEl.style.border = "1px solid";
+        divEl.style.borderColor = "black";
+
+    // Добавить блоку класс item_1 использовав setAttribute
+    </script>
+    <!-- Найти параграф с классом text-->
+
+    <div class="elem">
+        <img srg="photo.png" alt="photo">
+        <div class="content">
+            <h2 class="heading">TEXT</h2>
+            <p class="text"> USUAL</p>
+        </div>
+    </div>
+    <script>
+        const parEl2 = document.querySelector('.text');
+        console.log(parEl);
+
+        // Вывести в консоль h2
+        console.log(parEl2.previousElementSibling);
+        // Вывести в консоль родительский элемент content
+        console.log(parEl2.parentElement);
+        // Вывести в консоль картинку
+        const imgEl2 = document.querySelector('img');
+        console.log(imgEl2);
+        // Вывести в консоль родительский элемент elem
+        console.log(parEl2.parentElement.parentElement);
+    </script>
+    <div class="item3">
+        <div class="elem3">
+            <div class="info">
+                <h2 class="subtitle3">TEXT 3</h2>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        // Найти элемент h2 и вывести в консоль всех родителей с помощью querySelector
+        const subtitle = document.querySelector(".subtitle3");
+        console.log(subtitle.parentElement);
+        console.log(subtitle.parentElement.parentElement);
+        console.log(subtitle.parentElement.parentElement.parentElement);
+/*
+                    let el = subtitle;
+                    while (el) {
+                        console.log(el);
+                        el = el.parentElement;
+                    }
+            */
+
+    </script>
+    <form action="#">
+        <input type="text">
+        <button class="btn">SENT</button>
+    </form>
+    <script>
+        // если пользователь нажимает на отправку, а поле не заполненно, выскакивает сообщение
+        const input = document.querySelector('input[type="text"]');
+        const btn = document.querySelector('.btn');
+        btn.onclick = function () {
+            /*
+            if (input.value == "") {
+                const varning = document.createElement("h2");
+                varning.textContent = "вы не написали текст";
+                varning.style.border = "1px solid red";
+                const form = document.querySelector('form[action="#"]');
+                form.appendChild(varning);
+            }
+            /* Вариант 2 */
+            if (!input.value) {
+                console.log(input.value);
+                const varning = document.createElement("h2");
+                varning.textContent = "вы не написали текст";
+                varning.style.border = "1px solid red";
+                const form = document.querySelector('form[action="#"]');
+                form.appendChild(varning);
+            }
+        };
+    // цвет у рамок сделать красным
+    </script>
+    <div class="content5"></div>
+    <script>
+        // Создать элемент button. Добавить текст кнопки ОТПРАВИТЬ. При клике текст меняется на ТЕКСТ ОТПРАВЛЕН.
+        const cont = document.querySelector(".content5");
+        const button = document.createElement("button");
+        button.textContent = "SENT";
+        cont.appendChild(button);
+
+
+        button.onclick = function () {
+            button.textContent = "SENTED TEXT";
+            setTimeout(() => alert('YES!!!'), 0);
+        };
+
+        /*
+                button.click = function onclick() {
+                    button.textContent = "SENTED TEXT";
+                    setTimeout(() => alert('YES!!!'), 0);
+                };
+                */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+# Настройка переменных
+В файле hosts пишем настройки переменных. Создаем раздел и в него записываем любые переменные используемые в файле.
+[windows_servers:vars]
+ansible_user = ka-test
+ansible_password = Zel0bit04k@_TEST
+ansible_port = 5686
+ansible_connection - winrm
+ansible_winrm_server_cert_validation = ignore
+# Устанавливаем на Windows Kerberos
+# При запуске ansible на Windowsвсе моули начинаются с win_ping
+ansible windows_servers -m win_ping
+
+# Настройка файла hosts
+Можно писать в столбик IP
+ 
+ 10.1.1.1
+ 10.1.1.2
+ ......
+
+# Или писать с именами
+myhost1 ansible_host=10.1.1.1
+myhost2 ansible_host=10.1.1.2
+ ......
+
+В Ansible есть группы ALL и UNGROUP. туда включены все сервера, которые не входят ни в одну группу.
+
+#Можно создать группу в которой будут другие группы:
+[staging_ALL:children]
+staging_DB
+staging_WEB
+staging_APP
+
+
+[staging_DB]
+ 10.1.1.11
+ 10.1.1.21
+[staging_WEB]
+ 10.1.1.12
+ 10.1.1.22
+[staging_APP]
+ 10.1.1.13
+ 10.1.1.23
+
+ # Чтобы посмотреть файд inventory
+ ansible-inventory --list
+ansible-inventory --graph
