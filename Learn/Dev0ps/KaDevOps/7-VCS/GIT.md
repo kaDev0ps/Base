@@ -142,7 +142,7 @@ git reset --hard HEAD~2
 <!-- Можем удалить предыдущие коммиты. Чтоб последний коммит стал 1 -->
 git reset --soft HEAD~3
 
-# Тагироание
+# Тагирование
 <!-- Мы можем помечать версии кода таками -->
 git tag v.1.0.0
 <!-- И отправлять в репозиторий -->
@@ -153,3 +153,10 @@ git tag -d v.1.0.0
 git push origin --delete tag v.1.0.0
 <!-- Можем перейти на нужную нам версию -->
 git checkout v1.0.3
+<!-- Если у нас есть коммит без тега, то можно его назначить -->
+git tag -a v.1.0.0.9 recfvyguyipijiygf5gioimp34567898765
+<!-- Залить все таги на githubs -->
+git push origin --tags
+# Удаление ненужнй информации с Github
+git reset --hard HEAD~1
+git push origin main --force
