@@ -1,0 +1,26 @@
+#================
+#Comment
+#================
+
+name: My-GithubActions-first
+
+on: 
+  push: 
+    branches:
+      - master
+
+jobs:
+
+  my_testing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Print Hello World
+    - run: echo "Hello World from testing"
+    
+  my_deploy:
+    runs-on: 
+
+    steps: ubuntu-latest
+    - name: Print Hello World
+    - run: echo "Hello World from testing"
