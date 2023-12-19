@@ -113,7 +113,6 @@ git branch -d test_branche_task_1
 удаляем удаленно из github -->
 
 git push origin --delete test_branch
-<<<<<<< HEAD
 
 # Подключаем SSH ключ для gitHub
 ssh-keygen
@@ -142,5 +141,13 @@ git reset --hard HEAD~2
 
 <!-- Можем удалить предыдущие коммиты. Чтоб последний коммит стал 1 -->
 git reset --soft HEAD~3
-=======
->>>>>>> b937cc45d9bfb0b884daf18eda058e29f63fd951
+
+# Тагироание
+<!-- Мы можем помечать версии кода таками -->
+git tag v.1.0.0
+<!-- И отправлять в репозиторий -->
+git push origin v1.0.1
+<!-- Удалить таг  -->
+git tag -d v.1.0.0
+<!-- Удаляем с удаленного репозитория -->
+git push origin --delete tag v.1.0.0
