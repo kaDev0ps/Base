@@ -16,10 +16,10 @@ jobs:
     steps:
     - name: Print Hello World
     - run : echo "Hello World from testing"
-    
-  my_deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Print Hello World
-    - run : echo "Hello World from Deploy"
+ 
+#  my_deploy:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Print Hello World
+#    - run : echo "Hello World from Deploy"
