@@ -151,3 +151,5 @@ git push origin v1.0.1
 git tag -d v.1.0.0
 <!-- Удаляем с удаленного репозитория -->
 git push origin --delete tag v.1.0.0
+<!-- Можем перейти на нужную нам версию -->
+git checkout v1.0.3
