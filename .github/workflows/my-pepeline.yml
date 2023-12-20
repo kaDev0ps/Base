@@ -6,15 +6,15 @@
 #
 # Made by Denis Astahov ADV-IT Copyleft (c) 2019
 #---------------------------------------------------------------------
-name: My-GitHubActions-Basics
+name: My-GitHubActions-Test
 env:
-  APPLICATION_NAME    : "MyFlask"
+  APPLICATION_NAME    : "MyFlask2"
   DEPLOY_PACKAGE_NAME : "flask-deploy-ver-${{ github.sha }}"
 
 on: 
   push:
     branches: 
-      - master
+      - main
 
 jobs:
   my_testing:
