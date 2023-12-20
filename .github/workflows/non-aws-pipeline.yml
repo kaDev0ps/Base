@@ -14,6 +14,7 @@
 # APPLICATION_NAME - имя приложения
 # DEPLOY_PACKAGE_NAME - имя пакета приложения
 # zip -r {{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git* Создание архива с исключением
+
 name: My-GitHubActions-Test2
 env:
   APPLICATION_NAME    : "MyFlask"
