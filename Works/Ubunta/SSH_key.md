@@ -9,3 +9,8 @@ ssh-copy-id username@remote_host
 <!-- подключаемся к машине -->
 
 ssh -i ~/.ssh/id_rsa -p 2022 pupy@127.0.0.1
+
+<!-- Отключение SSH пароль -->
+/etc/ssh/sshd_config
+
+systemctl restart ssh
