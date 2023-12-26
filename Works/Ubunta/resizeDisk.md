@@ -63,7 +63,7 @@ CHANGED: partition=2 start=4096 old: size=20965376 end=20969472 new: size=419389
 
 <!-- Почистил логи -->
 
-rm -r /var/log/\*.gz
+rm -r /var/log/*.gz
 
 <!-- После этого сделал pvresize -->
 

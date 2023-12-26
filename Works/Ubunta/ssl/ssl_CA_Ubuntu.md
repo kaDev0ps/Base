@@ -21,3 +21,14 @@ sudo update-ca-certificates
 
 В виде одного файла (пакет PEM) в /etc/ssl/certs/ca-certificates.crt
 В качестве каталога сертификатов, совместимого с OpenSSL, в /etc/ssl/certs
+
+# Для CentOS
+Включаем динамическое обновление сертификатов:
+
+$ sudo update-ca-trust enable
+Потом копируем нужный сертификат в доверенные:
+
+$ sudo cp ca.crt /etc/pki/ca-trust/source/anchors/
+Обновляем доверенные сертификаты:
+
+$ sudo update-ca-trust extract

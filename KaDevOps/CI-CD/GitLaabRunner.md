@@ -44,7 +44,7 @@ docker run -d --name gitlab-runner --restart always \
 sudo docker run --rm -it -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register
 <!-- Если возникает ошибка -->
 <!-- tls: failed to verify certificate: x509: certificate signed by unknown authority -->
-<!-- Меняем адрес нашего сервера gitlab.zelobit.local -->
+<!-- Добавляем корневой сертификат в доверенные! Меняем адрес нашего сервера gitlab.zelobit.local -->
 # Download the binary for your system
 sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
 
@@ -120,4 +120,89 @@ stage_build:
     artifacts:
         paths:
             - build/
-# Мы пишем последовательность действий и сохраняем артефактыъ
+<!-- Мы пишем последовательность действий и сохраняем артефакты, которые пожно потом скачать -->
+# Устанавливаем runner на другую машину. На ней должен стоять git!
+<!-- Если будет в первом pipeline ошибка, то дальше проверка не пройдет, но мы можем игнорировать ошибки -->
+stages:
+    - build
+    - test
+
+stage_build:
+    stage: build
+    image: ubuntu:20.04
+    tags:
+        - gitlab3
+    script:
+        - mkdir build
+        - echo "Privet Gitlab ya? PLease? 1234" >> installWEB.sh
+        - echo 'sudo apt install apache2' >> installWEB.sh
+        - cat installWEB.sh
+        - cp installWEB.sh build/
+        - cd build
+    artifacts:
+        paths:
+            - build/
+# игнорируем ошибки
+    allow_failure: true
+            
+testing:
+    stage: test
+    tags:
+        - test
+    script:
+        - echo "Privet"
+        - touch file1
+        - echo "Hello Runner!1" > file1
+
+<!-- Если у нас ошибка доступа, то мы можем расширить права пользователя на хосте с ранером. -->
+visudo
+<!-- добавляем -->
+gitlab-runner ALL=(ALL) NOPASSWD: ALL
+
+<!-- Можем добавлять переменные в настройках или в самих pipeline -->
+<!-- Перезагрузка службы -->
+sudo gitlab-ctl restart
+
+# Пример кода выполнения скрипта и развертывание apache сервера
+
+stages:
+    - build
+    - test
+    - staging
+
+stage_build:
+    stage: build
+    image: ubuntu:20.04
+    tags:
+        - gitlab3
+    script:
+        - mkdir build
+        - cp installWEB.sh build/
+        - cd build
+        - echo 'echo "Privet Gitlab!!"' >> installWEB.sh
+        - echo 'sudo yum install httpd -y' >> installWEB.sh
+        - cat installWEB.sh
+        - echo 'echo "Privet Gitlab!"' >> index.html
+
+    artifacts:
+        paths:
+            - build/
+    allow_failure: true
+            
+testing:
+    stage: test
+    tags:
+        - test
+    script:
+        - sudo bash build/installWEB.sh
+        - sudo cp build/index.html /var/www/html/index.html
+deploy_staging:
+    stage: staging
+    tags:
+        - stage
+    script:
+        - sudo bash build/installWEB.sh
+        - sudo cp build/index.html /var/www/html/index.html
+    when: manual
+
+<!-- В домашней папке пользователя под которым запущен gitlab-runner создается каталог duilds. В нем раннеры связанные с гитлабом.  -->

@@ -23,7 +23,8 @@ cat /usr/share/doc/netplan/examples/static.yaml
   <!-- 
   version: 2
   renderer: networkd
-  ethernets:
+  ethernets:ip a
+  
     enp3s0:
       addresses:
         - 95.214.119.26/24
