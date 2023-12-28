@@ -63,10 +63,15 @@ docker push adev0ps/cowsay
 docker rmi gitlab/gitlab-runner:v2
 <!-- Скачать образ и запустить команду -->
 docker run adev0ps/cowsay cowsay "YESSS"
+<!-- Узнать ip docker -->
+docker-machine ip default
 
 
 
 # Флаги
 -it  Интерактивный сеанс работы
 -d   Запуск в фоновом режиме
+-e   Устанавливаем переменные окружения
+--link Устанвка соединения с БД
 pull run Скачать образ и сразу запустить контейнер
+--name Удобное имя контейнера для обращения
