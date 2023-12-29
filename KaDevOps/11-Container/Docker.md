@@ -68,7 +68,25 @@ docker run adev0ps/cowsay cowsay "YESSS"
 <!-- Узнать ip docker -->
 docker-machine ip default
 
+# Дополнение
+<!-- Поиск образа с dockerHub -->
+docker search ubuntu
+<!-- Скачать образ -->
+docker pull
+<!-- Создать именнованый образ с имеющегося -->
+docker create -it --name testt ubuntu:18.04
+<!-- Изменить название образа -->
+docker rename testt test
 
+<!-- Подключение к запущенному контейнеру -->
+docker attach test
+<!-- Подключение к контейнеру и при выходе он не останавливается -->
+docker exe -it test bash
+Запуск контейнера nginx, подключение через bash, прокидываем наш файл и удаление конейнера после выхода, проброс порта,
+docker run -it --rm -p 8080:80 \
+-v ~/www:/var/www/html \
+-v ~/conf.d:etc/nginx/conf.d \
+nginx bash
 
 # Флаги
 -it  Интерактивный сеанс работы
