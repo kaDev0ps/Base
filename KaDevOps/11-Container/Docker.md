@@ -43,6 +43,8 @@ docker logs Ubuntu-doc
 docker rm NameContainer
 <!-- Удалить все остановленные контейнеры с помощью подстановки команды -->
 docker rm -v $(docker ps -aq -f status=exited)
+<!-- Удалить все образы -->
+docker rmi $(docker images -q) --force
 <!-- Запуск контейнера в фоновом режиме Apache -->
 docker run -d bitnami/apache
 <!-- Чтобы достучаться до контейнера через http надо проблросить порты -->

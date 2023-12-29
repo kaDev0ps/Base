@@ -11,6 +11,11 @@ docker-compose ps
 <!-- Запуск в фоне -->
 docker-compose up -d
 
+# пересборка проекта
+docker-compose build
+
+# удаление контейнера по имени сервиса
+docker-compose rm db
 
 
 

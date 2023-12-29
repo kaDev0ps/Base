@@ -2,12 +2,14 @@ version: '3.1'
 
 services:
   db:
-    image: mariadb
+    build: ./db
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: 123456
+      MARIADB_ROOT_PASSWORD: 1234567
+    volumes:
+      - ./databases:/var/lib/mysql
   adminer:
-    image: adminer
+    build: ./adminer
     restart: always
     ports:
-      - 8082:8080
+      - 8083:8080

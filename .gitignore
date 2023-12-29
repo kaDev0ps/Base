@@ -17,6 +17,7 @@ x64/
 # /Programist
 # /Network
 # MSTest test Results
+/KaDevOps/11-Container/DockerFile/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
