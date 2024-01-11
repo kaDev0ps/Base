@@ -56,7 +56,6 @@ cowsay "test"
 <!-- Сохранить изменения в контейнере создав из него образ. Указав логин на гитхабе/имяНовогоОбраза -->
 <!-- Нужно выйти из работающего контейнера -->
 docker commit myapp adev0ps/cowsay
-docker commit -m "xx" -a "test" container-id test/image:tag
 <!-- Можно запустить команду на докере вместо bash -->
 docker run adev0ps/cowsay cowsay "HI"
 <!-- Отправляем образ на Docker Hub -->
