@@ -203,8 +203,8 @@ apt-get install chromium-bsu
 whereis chromium-bsu
 apt-get remove chromium-bsu
 cat /etc/apt/sources.list ## репозиторий
-sudo dpkg -i name.deb ## Установка пакетовы
-sudo dpkg -r name.deb ## Удаление пакетовы
+sudo dpkg -i name.deb ## Установка пакетов
+sudo dpkg -r name.deb ## Удаление пакетов
 
 ## Для CentOS
 
@@ -275,3 +275,15 @@ export PS1="\e[1;32m\A \u@\h:\w\$ \e[m"
 <!-- Нужно создать если нет -->
 
 source /etc/skel/.bashrc
+
+# Проверить какие порты открыты
+sudo ss -ltn
+# Проверить какими процессами заняты порты
+sudo ss -ltnp
+# посмотреть установленный пакет
+dpkg -l | grep openjdk
+# Полностью удалить пакет
+sudo apt purge oracle-java11*
+
+# Найти файл в системе по имени
+find / -name top [Enter]

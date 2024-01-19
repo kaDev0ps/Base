@@ -14,7 +14,7 @@ sudo wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/mast
 
 <!-- Будет установлен Docker и службы самого Outline, а также все зависимости. При необходимости Вы можете установить Docker самостоятельно перед запуском скрипта. -->
 
-<!-- Когда скрипт закончит, то выведет примерно такое содержимое.
+<!-- Когда скрипт закончит, то выведет примерно такое содержимое.docker ps
 
 {
   "apiUrl": "https://0.0.0.0:0000/XXXXXXXXXXXX",
@@ -26,9 +26,26 @@ sudo wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/mast
 sudo ufw allow 31111/tcp
 sudo ufw allow 24311/tcp
 
+sudo iptables -A INPUT -p udp --dport 39921 -j ACCEPT
+
 <!-- Управление серверном VPN, в т.ч. раздача доступов, осуществляется с помощью Outline Manager, доступной для Windows, Max и Linux.
 https://getoutline.org/ru/ -->
 <!-- При запуске нужно добавить сервер и выбрать «Настроить Outline где угодно». Появится инструкция по установке с помощью скрипта, который мы ранее запускали. А после поле для ввода ключа и адреса, который Вы до этого сохранили.
 
 После этого у Вас появится доступ к управлению сервером.
 Пишем Имя клиента и жмем на значок поделиться-->
+
+
+# Создание сервера в докере
+<!-- Поиск образа с dockerHub -->
+docker search ubuntu
+<!-- Скачать образ -->
+docker pull
+<!-- Создать именнованый контейнер с имеющегося -->
+docker create -it --name VPNoutline ubuntu:22.04
+<!-- Заходим в контейнеръ -->
+docker run -it --name outline --hostname docker ubuntu bash
+
+apt update && apt upgrade
+
+apt install wget
