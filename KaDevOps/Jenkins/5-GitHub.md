@@ -9,6 +9,6 @@ git clone git@github.com:kaDev0ps/jenkins.git
 
 С машины на которой скачиваются репозитории с GitHihub делаем ключи -->
 ssh-keygen -t ed25519
-jenkins
+jenkins 
 <!-- Публичный на GitHub закидываем, А приватный на сервер Jenkins -->
 При создании задания выбираем Add. Username пользак GitHub.
