@@ -6,6 +6,8 @@
 *.user
 *.sln.docstates
 project_git*
+GitJenkins*
+ssh-ed*
 # Build results
 
 [Dd]ebug/

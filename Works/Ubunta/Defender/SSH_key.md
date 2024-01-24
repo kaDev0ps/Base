@@ -33,5 +33,27 @@ ssh -i ~/.ssh/ssh_key user@192.168.0.1
 <!-- Внимание! Разрешение файла ключа должно быть 600 -->
 
 <!-- Разрешаем аутентификацию по ключам -->
- nano  /etc/ssh/sshd_config
- PubkeyAuthentication yes
+nano  /etc/ssh/sshd_config
+PubkeyAuthentication yes
+
+
+ # Настройка нового типа шифрования
+cd ~/.ssh/
+ssh-keygen -t ed25519
+chmod 600 ~/.ssh/id_ed25519
+
+
+ <!-- Настраиваем ssh config -->
+<!-- Чтобы ssh мог автоматически использовать правильные ключи при работе с удалёнными репозиториями, необходимо задать некоторые настройки. А именно - добавить в файл ~/.ssh/config следующие строки: -->
+nano ~/.ssh/config
+
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/personal_key
+    IdentitiesOnly yes
+где:
+
+gihub.com - url сервиса, с которым будем работать (указываем одинаковым в Host и HostName).
+
+~/.ssh/personal_key - путь до файла с приватным ключом, который необходимо использовать для подключения.
