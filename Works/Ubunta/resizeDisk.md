@@ -67,12 +67,12 @@ rm -r /var/log/*.gz
 
 <!-- После этого сделал pvresize -->
 
-pvresize /dev/sda3
+sudo pvresize /dev/sda3
 
 <!-- И наконец расширить lv -->
 
-lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+sudo lvextend -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
 
 <!-- И поменять размер в файловой системе -->
 
-resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv

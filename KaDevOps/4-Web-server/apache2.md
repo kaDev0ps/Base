@@ -79,3 +79,23 @@ systemctl reload apache2
 <!-- Здесь test.site - имя файла виртуального хоста. Для отключения тоже есть команда:
 
  sudo a2dissite test.site -->
+
+# Убрать тестовую страницу апач
+<!-- Если CentOS -->
+ sudo systemctl status httpd
+<!-- Разрешить индексы в Apache
+Без индекса  будет отображаться стандартная страница приветствия Apache, если не изменить /etc/httpd/conf.d/welcome.conf, чтобы разрешить индексы. Отредактируем /etc/httpd/conf.d/welcome.conf, чтобы разрешить индексы. -->
+
+nano /etc/httpd/conf.d/welcome.conf
+<!-- и заменяем весь текст на один из указанных ниже -->
+
+<LocationMatch "^/+$">
+    # Options -Indexes
+    ErrorDocument 403 /error/noindex.html
+</LocationMatch>
+<LocationMatch "^/+$">
+    Options -Indexes
+</LocationMatch>
+<!-- перезапустить apache -->
+
+systemctl restart httpd

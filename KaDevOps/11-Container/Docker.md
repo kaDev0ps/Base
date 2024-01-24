@@ -1,18 +1,17 @@
 # Установка Docker
 # Обновление индексов
-sudo apt-get update
-<!-- Необходимые пакеты для работы -->
-sudo apt-get install ca-certificates curl gnupg
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
+sudo apt update
+<!-- Далее добавим в систему GPG-ключ для работы с официальным репозиторием Docker: -->
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+<!-- Теперь добавим репозиторий Docker в локальный список репозиториев: -->
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+<!-- Повторно обновим данные о пакетах операционной системы: -->
+sudo apt update
+<!-- Приступаем к установке пакета Docker. -->
+sudo apt install docker-ce -y
+<!-- После завершения установки запустим демон Docker и добавим его в автозагрузку: -->
+sudo systemctl start docker
+sudo systemctl enable docker
 # Test
 sudo docker run hello-world
 
@@ -73,16 +72,16 @@ docker-machine ip default
 docker search ubuntu
 <!-- Скачать образ -->
 docker pull
-<!-- Создать именнованый образ с имеющегося -->
+<!-- Создать именнованый контейнер с имеющегося -->
 docker create -it --name testt ubuntu:18.04
-<!-- Изменить название образа -->
+<!-- Изменить название контейнера -->
 docker rename testt test
 
 <!-- Подключение к запущенному контейнеру -->
 docker attach test
-<!-- Подключение к контейнеру и при выходе он не останавливается -->
-docker exe -it test bash
-Запуск контейнера nginx, подключение через bash, прокидываем наш файл и удаление конейнера после выхода, проброс порта,
+<!-- Подключение к работающему контейнеру и при выходе он не останавливается -->
+docker exec -it test bash
+<!-- Запуск контейнера nginx, подключение через bash, прокидываем наш файл и удаление конейнера после выхода, проброс порта, -->
 docker run -it --rm -p 8080:80 \
 -v ~/www:/var/www/html \
 -v ~/conf.d:etc/nginx/conf.d \
