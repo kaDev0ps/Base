@@ -21,17 +21,17 @@ ka ALL=(ALL) NOPASSWD:ALL
 # Создаем папку и хосты
 mkdir inventory
 cd inventory
-touch hosts.txt
+touch hosts
 # Создаем наши группы и включаем в них сервера
 [stagin_servers]
 linux_CentOS ansible_host=172.21.1.188
 
-[vpn_servers]
+[pro_servers]
 linux_AWS ansible_host=23.22.15.47
 
 [servers_ALL:children]
 stagin_servers
-vpn_servers
+pro_servers
 
 # Создаем файл ansible.cfg и в нег прописываем стандартную конфигурацию
 [defaults]
@@ -46,7 +46,7 @@ mkdir group_vars
 ├── group_vars
 │   ├── servers_ALL
 │   ├── stagin_servers
-│   └── vpn_servers
+│   └── pro_servers
 ├── hosts.txt
 
 ### stagin_servers

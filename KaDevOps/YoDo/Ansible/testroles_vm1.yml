@@ -1,0 +1,91 @@
+---
+
+- hosts: all
+  - name: Install nginx
+    block: # Debian #
+    apt:
+       pkg: nginx
+    become: yes
+  - name: Create dir for websites
+    file:
+
+       path: /var/www/{{ item }}
+
+       state: directory
+
+    become: yes
+
+    with_items: "{{ siteslist }}"
+
+  - name: Create nginx config files
+
+    template:
+
+       src: "website.j2"
+
+       dest: "/etc/nginx/sites-enabled/{{ item }}.conf"
+
+    with_items: "{{ siteslist }}"
+
+    become: yes
+
+    notify: nginxrestart
+    when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
+  handlers:
+
+  - name: nginxrestart
+
+    service:
+
+       name: "nginx"
+
+       state: "restarted"
+
+    become: yes
+
+  name: CentOS
+  block: ### CentOS ###
+  - name: Install nginx
+    yum:
+       pkg: nginx
+
+    become: yes
+
+  - name: Create dir for websites
+
+    file:
+
+       path: /var/www/{{ item }}
+
+       state: directory
+
+    become: yes
+
+    with_items: "{{ siteslist }}"
+
+  - name: Create nginx config files
+
+    template:
+
+       src: "website.j2"
+
+       dest: "/etc/nginx/sites-enabled/{{ item }}.conf"
+
+    with_items: "{{ siteslist }}"
+
+    become: yes
+
+    notify: nginxrestart
+
+  handlers:
+
+  - name: nginxrestart
+
+    service:
+
+       name: "nginx"
+
+       state: "restarted"
+
+    become: yes
+  when: ansible_os_family == "CentOS" or ansible_os_family == "Fedora"

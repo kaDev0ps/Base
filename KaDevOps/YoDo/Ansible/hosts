@@ -1,0 +1,7 @@
+[servers]
+vm0 ansible_host=158.160.123.9
+vm1 ansible_host=158.160.113.69
+vm2 ansible_host=158.160.98.31
+vm3 ansible_host=158.160.45.95
+vm4 ansible_host=158.160.127.250
+

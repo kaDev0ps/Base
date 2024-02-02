@@ -23,7 +23,7 @@ sudo ufw reload   Перезагрузка правил фаервола. Исп
 <!-- Ооткрываем конфигурацию и добавляем в конец строчку -->
 sudo nano /etc/ufw/before.rules
 
--A ufw-before-input -p tcp -d 95.214.116.10 --dpor  -j ACCEPT
+-A ufw-before-input -p tcp -d 95.214.116.10 --dport  -j ACCEPT
 <!-- Перезапускаем службу -->
 
 sudo ufw reload

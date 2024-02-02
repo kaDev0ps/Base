@@ -34,6 +34,19 @@ cat /usr/share/doc/netplan/examples/static.yaml
       routes:
         - to: default
           via: 10.10.10.1 -->
+Еще пример
+<!-- 
+network:
+  ethernets:
+    ens160:
+#      dhcp4: true
+      addresses:
+        - 172.21.0.150/22
+      nameservers:
+        search: [gitlab]
+        addresses: [172.21.0.4, ]
+  version: 2 -->
+
 
 **REBOOT!**
 

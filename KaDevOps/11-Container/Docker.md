@@ -87,6 +87,15 @@ docker run -it --rm -p 8080:80 \
 -v ~/conf.d:etc/nginx/conf.d \
 nginx bash
 
+<!-- И закидываем файл в контейнер -->
+
+`docker cp index.html web2:/var/www/index.html`
+<!-- Создание папок и изменение прав -->
+`docker exec -it web mkdir /var/www`
+
+`docker exec -it web chown nginx:nginx /var/www`
+
+
 # Флаги
 -it  Интерактивный сеанс работы
 -d   Запуск в фоновом режиме
@@ -94,3 +103,8 @@ nginx bash
 --link Устанвка соединения с БД
 pull run Скачать образ и сразу запустить контейнер
 --name Удобное имя контейнера для обращения
+
+# монтируем эту папку в контейнер как /var/www
+
+`docker run --name web7 -p 8007:80 -v ~/VS_code/Base/KaDevOps/YoDo/Docker/dockertest/www:/var/www -d user1/nginxtest`
+
