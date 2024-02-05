@@ -1,0 +1,32 @@
+version: "3"
+services:
+        mysql:
+                deploy:
+                       replicas: 1
+                image: mysql
+                ports:
+                        - 3306:3306
+                environment:
+                        - MYSQL_ROOT_PASSWORD=vecrek
+        nginx:
+                deploy:
+                        replicas: 2
+                image: user1/nginxtest
+                ports:
+                        - 8014:80
+                links:
+                        - php
+                volumes:
+#                        - /home/ka/VS_code/Base/KaDevOps/YoDo/Docker/dockertest/www:/var/www
+                        - mywww:/var/www
+        php:
+                image: macedigital/phpfpm
+                volumes:
+#                        - /home/ka/VS_code/Base/KaDevOps/YoDo/Docker/dockertest/www:/var/www
+                        - mywww:/var/www
+volumes:
+        mywww:
+                driver_opts:
+                        type: "nfs"
+                        o: "addr=172.21.0.14,nolock,soft,rw"
+                        device: ":/docker/learning"
