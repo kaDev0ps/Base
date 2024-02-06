@@ -8,7 +8,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 sudo bash < <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.sh)
 <!-- Заходим в фаервол и меняем порт -->
 sudo x-ui 
-21
+39921
 <!-- Блокировка хакеров ботов по IP -->
 apt install fail2ban -y && 
 systemctl start fail2ban &&

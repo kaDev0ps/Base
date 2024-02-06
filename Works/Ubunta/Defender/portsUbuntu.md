@@ -93,8 +93,7 @@ sudo iptables -I INPUT -m state --state INVALID -j DROP
 sudo iptables -A INPUT -p icmp -j ACCEPT
 sudo iptables -A OUTPUT -p icmp -j ACCEPT
 sudo iptables -A INPUT -p tcp -s 95.214.116.10 --dport 22 -j ACCEPT
-sudo iptables -A INPUT -p tcp -s 95.214.116.10 --dport 80 -j ACCEPT
-sudo iptables -A INPUT -p tcp -s 95.214.116.10 --dport 443 -j ACCEPT
+sudo iptables -A INPUT -p tcp -s 176.59.3.0/22 --dport 22 -j ACCEPT
 sudo iptables -P FORWARD DROP
 sudo iptables -P INPUT DROP
 sudo apt install iptables-save
@@ -115,3 +114,6 @@ sudo iptables-save
 
 # Проверка правил
 sudo iptables -nvL 
+# проверить все открытые порты
+sudo apt install nmap
+sudo nmap -p- localhost

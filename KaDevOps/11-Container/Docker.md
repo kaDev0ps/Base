@@ -72,7 +72,7 @@ docker-machine ip default
 docker search ubuntu
 <!-- Скачать образ -->
 docker pull
-<!-- Создать именнованый контейнер с имеющегося -->
+<!-- Создать именнованый контейнер с имеющегося образа-->
 docker create -it --name testt ubuntu:18.04
 <!-- Изменить название контейнера -->
 docker rename testt test
