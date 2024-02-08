@@ -1,0 +1,7 @@
+vsphere_user= "ka@****.zb"
+vsphere_password= "Passwork"
+vsphere_server= "172.25.0.101"
+vsphere_pool= "702-POOL5"
+vsphere_iso_pool= "702-POOL4"
+vsphere_directory= "NO PRODUCTION - KA"
+vsphere_vlan= "VLAN265"

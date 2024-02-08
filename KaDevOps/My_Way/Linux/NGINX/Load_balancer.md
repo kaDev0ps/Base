@@ -1,0 +1,2 @@
+[Как настроить балансировку нагрузки с помощью Nginx](https://telegra.ph/Kak-nastroit-balansirovku-nagruzki-s-pomoshchyu-Nginx-07-10)
+[Как настроить балансировку нагрузки с помощью Nginx](https://disk.yandex.ru/i/JE-uc_1T_zDdFw)

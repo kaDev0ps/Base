@@ -1,0 +1,1 @@
+[Основы MySQL](https://telegra.ph/Osnovy-MySQL-07-14)
