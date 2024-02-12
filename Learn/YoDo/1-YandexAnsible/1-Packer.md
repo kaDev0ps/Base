@@ -120,8 +120,8 @@ https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-engine---
 
 
 Введи
-
-packer validate debian11-config.json
+<!-- 
+packer validate debian11-config.json -->
 
 
 Ты должен увидеть:

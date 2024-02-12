@@ -6,7 +6,7 @@
 [Как настроить балансировку нагрузки с помощью Nginx](https://telegra.ph/Kak-nastroit-balansirovku-nagruzki-s-pomoshchyu-Nginx-07-10)
 [Основы MySQL](https://telegra.ph/Osnovy-MySQL-07-14)
 [Как повысить безопасность Docker-контейнеров](https://telegra.ph/Kak-povysit-bezopasnost-Docker-kontejnerov-07-14)
-[Регулярные выражения Bash](https://telegra.ph/Regulyarnye-vyrazheniya-Bash-07-10)
+[Как установить и настроить phpMyAdmin в Ubuntu 20.04](https://telegra.ph/Kak-ustanovit-i-nastroit-phpMyAdmin-v-Ubuntu-2004-07-16)
 [Регулярные выражения Bash](https://telegra.ph/Regulyarnye-vyrazheniya-Bash-07-10)
 [Регулярные выражения Bash](https://telegra.ph/Regulyarnye-vyrazheniya-Bash-07-10)
 [Регулярные выражения Bash](https://telegra.ph/Regulyarnye-vyrazheniya-Bash-07-10)
